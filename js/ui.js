@@ -120,7 +120,7 @@ function startCelebrateAnimation() {
         const ctx = celebCanvas.getContext('2d');
         ctx.clearRect(0, 0, celebCanvas.width, celebCanvas.height);
         const elapsed = now - startTime;
-        charMgr.drawStateFrame(ctx, state.charIndex, 'celebration', elapsed, celebCanvas.width / 2, celebCanvas.height * 0.95, 260, 260, -10, 0);
+        charMgr.drawStateFrame(ctx, state.charIndex, 'celebration', elapsed, celebCanvas.width / 2, celebCanvas.height * 0.95, 230, 230, -10, 0);
       }
       celebrateAnimFrame = requestAnimationFrame(loop);
     }
