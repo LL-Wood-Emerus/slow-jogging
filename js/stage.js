@@ -51,8 +51,8 @@ class StrollingManager {
     
     // Linear interpolation of trapezoid left and right boundaries
     // Top: [127, 648], Bottom: [190, 698]
-    const minX = 127 + t * (190 - 127) + 45; // +45px padding for larger sprite width
-    const maxX = 648 + t * (698 - 648) - 45; // -45px padding
+    const minX = 127 + t * (190 - 127) + 50; // +50px padding for larger sprite width
+    const maxX = 648 + t * (698 - 648) - 50; // -50px padding
 
     const clampedX = Math.max(minX, Math.min(maxX, requestedX));
     return { x: clampedX, y: clampedY };
@@ -142,7 +142,7 @@ class StrollingManager {
 
       // Calculate depth scale based on Y (y ranges 798 to 885)
       const depthRatio = (stroller.y - 798) / (885 - 798);
-      const drawScale = 240 + depthRatio * 40; // 240px (far back) ~ 280px (front)
+      const drawScale = 270 + depthRatio * 40; // 270px (far back) ~ 310px (front)
 
       charMgr.drawStrollFrame(
         ctx,
