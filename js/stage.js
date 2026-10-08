@@ -308,15 +308,8 @@ class StageRenderer {
     // Shadow position aligned directly with character shoe soles on treadmill
     const shadowY = charY - 20;
 
-    // Draw Dynamic Shadow
-    ctx.save();
-    const shadowWidth = Math.max(35, 55 + bounceOffset * 0.8);
-    const shadowAlpha = (Math.round((0.25 + bounceOffset * 0.008) * 100) / 100);
-    ctx.fillStyle = `rgba(0, 0, 0, ${Math.max(0.12, shadowAlpha)})`;
-    ctx.beginPath();
-    ctx.ellipse(charX, shadowY, shadowWidth, 12, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
+    // Draw Unified Dynamic Ground Shadow
+    charMgr.drawUnifiedGroundShadow(ctx, charX, shadowY, charWidth, bounceOffset);
 
     // Draw Character Animated Sprite Frame
     const bpmSpeedFactor = (state.bpm || 180) / 120;

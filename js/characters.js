@@ -191,16 +191,27 @@ class CharacterManager {
     ctx.save();
     ctx.translate(x, y);
 
-    // Dynamic ground shadow for strolling character (moved down & expanded vertically)
-    const shadowW = width * 0.22;
-    const shadowH = 11;
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.18)';
-    ctx.beginPath();
-    ctx.ellipse(0, 2, shadowW, shadowH, 0, 0, Math.PI * 2);
-    ctx.fill();
+    // Unified Ground Shadow
+    this.drawUnifiedGroundShadow(ctx, 0, 2, width, 0);
 
     // Render 512x512 sprite frame
     ctx.drawImage(img, frameIdx * frameW, 0, frameW, frameH, -width / 2, -height, width, height);
+    ctx.restore();
+  }
+
+  /**
+   * Unified Ground Shadow Renderer for all characters (running & strolling)
+   */
+  drawUnifiedGroundShadow(ctx, x, y, spriteWidth, bounceOffset = 0) {
+    const shadowW = Math.max(35, spriteWidth * 0.18 + bounceOffset * 0.8);
+    const shadowH = Math.max(8, spriteWidth * 0.04);
+    const shadowAlpha = Math.max(0.12, 0.22 + bounceOffset * 0.008);
+
+    ctx.save();
+    ctx.fillStyle = `rgba(0, 0, 0, ${shadowAlpha.toFixed(2)})`;
+    ctx.beginPath();
+    ctx.ellipse(x, y, shadowW, shadowH, 0, 0, Math.PI * 2);
+    ctx.fill();
     ctx.restore();
   }
 }
