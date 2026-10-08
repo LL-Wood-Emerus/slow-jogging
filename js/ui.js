@@ -516,6 +516,8 @@ function initEvents() {
       
       if (!state.isPaused) {
         audio.startAudio();
+      } else {
+        audio.pauseAudio();
       }
     });
   }

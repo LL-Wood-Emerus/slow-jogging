@@ -168,10 +168,14 @@ class AudioEngine {
     this.init();
     this.playBgm(state.sceneId);
 
-    if (!this.metroTimer) {
-      this.nextNoteTime = this.ctx.currentTime;
-      this.scheduleAudio();
+    if (this.metroTimer) {
+      clearTimeout(this.metroTimer);
+      this.metroTimer = null;
     }
+    if (this.ctx) {
+      this.nextNoteTime = this.ctx.currentTime;
+    }
+    this.scheduleAudio();
   }
 
   pauseAudio() {
@@ -217,7 +221,10 @@ class AudioEngine {
   }
 
   scheduleAudio = () => {
-    if (state.screen !== 'running' || state.isPaused) return;
+    if (state.screen !== 'running' || state.isPaused) {
+      this.metroTimer = null;
+      return;
+    }
 
     const safeBpm = Math.max(30, state.bpm || 180);
     const secondsPerBeat = 60.0 / safeBpm;
