@@ -53,6 +53,12 @@ class CharacterManager {
       }
     }
 
+    // Load stroll sprite sheets (2048 x 512, 4 frames of 512 x 512)
+    const strollL = await this.loadImage(`assets/charecter/stroll/${id}/stroll_l.png`);
+    const strollR = await this.loadImage(`assets/charecter/stroll/${id}/stroll_r.png`);
+    states['stroll_l'] = { image: strollL };
+    states['stroll_r'] = { image: strollR };
+
     this.characters[id] = { config, states };
   }
 
@@ -159,6 +165,42 @@ class CharacterManager {
 
     const rect = frame.rect || [0, 0, json.frameWidth || 512, json.frameHeight || 512];
     ctx.drawImage(img, rect[0], rect[1], rect[2], rect[3], -width / 2, -height, width, height);
+  }
+
+  /**
+   * Draw stroll sprite sheet frame for background strolling characters
+   * - Slow chunky frame rate: 250ms per frame (4 frames per cycle)
+   * - dir: 'l' (facing/walking left) or 'r' (facing/walking right)
+   */
+  drawStrollFrame(ctx, charIndexOrId, dir, timeMs, x, y, width, height) {
+    if (!this.imgLoaded) return;
+    const charId = (typeof charIndexOrId === 'number') ? this.charIds[charIndexOrId] : charIndexOrId;
+    const charData = this.characters[charId];
+    if (!charData) return;
+
+    const stateKey = (dir === 'l') ? 'stroll_l' : 'stroll_r';
+    const sData = charData.states[stateKey];
+    if (!sData || !sData.image) return;
+
+    const img = sData.image;
+    // Slow chunky step rate requested by user: 250ms per frame
+    const frameIdx = Math.floor((timeMs / 250) % 4);
+    const frameW = 512;
+    const frameH = 512;
+
+    ctx.save();
+    ctx.translate(x, y);
+
+    // Dynamic ground shadow for strolling character
+    const shadowW = width * 0.36;
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.22)';
+    ctx.beginPath();
+    ctx.ellipse(0, -10, shadowW, 10, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Render 512x512 sprite frame
+    ctx.drawImage(img, frameIdx * frameW, 0, frameW, frameH, -width / 2, -height, width, height);
+    ctx.restore();
   }
 }
 

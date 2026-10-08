@@ -31,6 +31,133 @@ const STAGE_LAYOUT_CONFIG = {
   }
 };
 
+/**
+ * Background Strolling Characters Manager
+ * Controls non-selected characters strolling around inside STAGE_LAYOUT_CONFIG.walkArea
+ */
+class StrollingManager {
+  constructor() {
+    this.strollers = [];
+  }
+
+  // Clamps point (x, y) strictly within the trapezoid of walkArea
+  getValidWalkPos(requestedX, requestedY) {
+    const area = STAGE_LAYOUT_CONFIG.walkArea;
+    const minY = area.bounds.minY; // 798
+    const maxY = area.bounds.maxY; // 885
+
+    const clampedY = Math.max(minY, Math.min(maxY, requestedY));
+    const t = (clampedY - minY) / (maxY - minY);
+    
+    // Linear interpolation of trapezoid left and right boundaries
+    // Top: [127, 648], Bottom: [190, 698]
+    const minX = 127 + t * (190 - 127) + 35; // +35px padding for sprite width
+    const maxX = 648 + t * (698 - 648) - 35; // -35px padding
+
+    const clampedX = Math.max(minX, Math.min(maxX, requestedX));
+    return { x: clampedX, y: clampedY };
+  }
+
+  getRandomTarget() {
+    const area = STAGE_LAYOUT_CONFIG.walkArea;
+    const rx = area.bounds.minX + Math.random() * (area.bounds.maxX - area.bounds.minX);
+    const ry = area.bounds.minY + Math.random() * (area.bounds.maxY - area.bounds.minY);
+    return this.getValidWalkPos(rx, ry);
+  }
+
+  init(runningCharIndex) {
+    this.strollers = [];
+    const allIndices = [0, 1, 2];
+    const strollIndices = allIndices.filter(i => i !== runningCharIndex);
+
+    // Initial starting positions for the 2 strolling characters
+    const startPositions = [
+      { x: 250, y: 820 },
+      { x: 530, y: 860 }
+    ];
+
+    strollIndices.forEach((charIdx, i) => {
+      const startPos = this.getValidWalkPos(startPositions[i].x, startPositions[i].y);
+      const targetPos = this.getRandomTarget();
+      const dx = targetPos.x - startPos.x;
+
+      this.strollers.push({
+        charIndex: charIdx,
+        x: startPos.x,
+        y: startPos.y,
+        targetX: targetPos.x,
+        targetY: targetPos.y,
+        dir: (dx < 0) ? 'l' : 'r',
+        speed: 45 + Math.random() * 20, // 45~65 px/sec casual stroll speed
+        pauseTimer: 0,
+        animTime: Math.random() * 1000
+      });
+    });
+  }
+
+  updateAndRender(ctx, dt, isPaused) {
+    if (this.strollers.length === 0) return;
+
+    // Y-sorting so characters farther back (smaller Y) draw behind closer ones (larger Y)
+    this.strollers.sort((a, b) => a.y - b.y);
+
+    this.strollers.forEach(stroller => {
+      if (!isPaused) {
+        stroller.animTime += dt * 1000;
+
+        if (stroller.pauseTimer > 0) {
+          stroller.pauseTimer -= dt;
+        } else {
+          // Move towards target
+          const dx = stroller.targetX - stroller.x;
+          const dy = stroller.targetY - stroller.y;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist < 8) {
+            // Reached target -> pause for 1 to 3 seconds before next stroll
+            stroller.pauseTimer = 1.0 + Math.random() * 2.0;
+            const newTarget = this.getRandomTarget();
+            stroller.targetX = newTarget.x;
+            stroller.targetY = newTarget.y;
+            const newDx = stroller.targetX - stroller.x;
+            if (Math.abs(newDx) > 5) {
+              stroller.dir = (newDx < 0) ? 'l' : 'r';
+            }
+          } else {
+            const step = stroller.speed * dt;
+            stroller.x += (dx / dist) * step;
+            stroller.y += (dy / dist) * step;
+            
+            // Keep inside valid trapezoid
+            const valid = this.getValidWalkPos(stroller.x, stroller.y);
+            stroller.x = valid.x;
+            stroller.y = valid.y;
+
+            if (Math.abs(dx) > 2) {
+              stroller.dir = (dx < 0) ? 'l' : 'r';
+            }
+          }
+        }
+      }
+
+      // Calculate depth scale based on Y (y ranges 798 to 885)
+      const depthRatio = (stroller.y - 798) / (885 - 798);
+      const drawScale = 165 + depthRatio * 35; // 165px ~ 200px
+
+      charMgr.drawStrollFrame(
+        ctx,
+        stroller.charIndex,
+        stroller.dir,
+        stroller.animTime,
+        stroller.x,
+        stroller.y,
+        drawScale,
+        drawScale
+      );
+    });
+  }
+}
+
 class StageRenderer {
   constructor() {
     this.canvas = document.getElementById('stage-canvas');
@@ -38,9 +165,11 @@ class StageRenderer {
     this.animFrame = null;
     this.runningTime = 0;
     this.lastTimestamp = 0;
+    this.lastDt = 0.016;
     this.canvasRect = null;
     this.bubbleEl = null;
     this.cachedBgCanvas = null;
+    this.strollingMgr = new StrollingManager();
   }
 
   resize() {
@@ -94,6 +223,7 @@ class StageRenderer {
     this.runningTime = 0;
     this.resize();
     this.buildCachedBackground();
+    this.strollingMgr.init(state.charIndex);
     this.lastTimestamp = performance.now();
     this.loop();
   }
@@ -110,6 +240,7 @@ class StageRenderer {
       const current = now || performance.now();
       const dt = Math.min((current - (this.lastTimestamp || current)) * 0.001, 0.1);
       this.lastTimestamp = current;
+      this.lastDt = dt;
 
       if (!state.isPaused && state.screen === 'running') {
         this.runningTime += dt;
@@ -137,7 +268,10 @@ class StageRenderer {
       if (this.cachedBgCanvas) ctx.drawImage(this.cachedBgCanvas, 0, 0);
     }
 
-    // 2. Layer 2 (Top): Character on Treadmill
+    // 2. Layer 1.5: Background Strolling Characters on Floor
+    this.strollingMgr.updateAndRender(ctx, this.lastDt, state.isPaused || state.isCountdown);
+
+    // 3. Layer 2: Character on Treadmill
     this.renderRunningCharacter(ctx);
   }
 
