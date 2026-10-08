@@ -80,5 +80,5 @@
 
 /* When character card is selected (standing posture) */
 .char-select-card.selected .char-name-tag {
-  top: -40px; /* Selected (standing): Name ELEVATES UP to clear standing head and selection ring */
+  top: 10px; /* Selected (standing): Name tag inside the selection box border */
 }

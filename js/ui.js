@@ -44,7 +44,7 @@ const HOME_CHAR_LAYOUT = {
   scaleUnselected: 170,
   scaleSelected: 200,
   nameTopUnselected: '40px',
-  nameTopSelected: '-40px'
+  nameTopSelected: '10px'
 };
 
 function updateCardSelectionDOM() {
