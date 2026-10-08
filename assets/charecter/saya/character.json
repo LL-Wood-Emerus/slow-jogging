@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "characterId": "saya",
+  "assetVersion": "release-v1",
+  "status": "approved",
+  "canvas": [
+    512,
+    512
+  ],
+  "anchor": [
+    256,
+    464
+  ],
+  "safeMargin": 16,
+  "background": "white",
+  "states": {
+    "sitting": {
+      "image": "sitting.png",
+      "frameCount": 1
+    },
+    "idle": {
+      "metadata": "idle.json",
+      "image": "idle.png"
+    },
+    "idle_blink": {
+      "metadata": "idle_blink.json",
+      "image": "idle_blink.png"
+    },
+    "running": {
+      "metadata": "running.json",
+      "image": "running.png"
+    },
+    "celebration": {
+      "metadata": "celebration.json",
+      "image": "celebration.png"
+    }
+  },
+  "normalizationPolicy": "Fixed per-source scale calibrated by head size, no per-frame resizing; template values provisional",
+  "sittingTransform": {
+    "scale": 0.28,
+    "sourceAnchor": [
+      575,
+      1405
+    ]
+  },
+  "sourceBase": "../../生成輔助資料/參考圖/saya_2D_front_view.png",
+  "approvedOn": "2026-10-06",
+  "optionalStates": {
+    "walking": {
+      "image": "walking.png",
+      "metadata": "walking.json"
+    }
+  }
+}

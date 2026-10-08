@@ -1,0 +1,84 @@
+/* Custom CSS Styles for Q-version Slow Jogging Companion */
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Button Active State Highlights (Light Theme) */
+.btn-active {
+  border-color: #f43f5e !important;
+  background-color: #fff1f2 !important;
+  color: #e11d48 !important;
+  box-shadow: 0 0 10px rgba(244, 63, 94, 0.2);
+}
+
+/* Screen Transitions */
+.screen {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Pulse Glow Animation */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(236, 72, 153, 0.8);
+  }
+}
+
+.glow-effect {
+  animation: glow-pulse 2s infinite ease-in-out;
+}
+
+/* Bounce in modal animation */
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.03) translateY(-5px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Speech Bubble Animation */
+.speech-bubble {
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+}
+
+/* Character Selection Card & Dynamic Name Tag Offset */
+.char-name-tag {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 40px; /* Unselected (sitting): Name is LOW and CLOSE to sitting head */
+  transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 20;
+  white-space: nowrap;
+}
+
+/* When character card is selected (standing posture) */
+.char-select-card.selected .char-name-tag {
+  top: -40px; /* Selected (standing): Name ELEVATES UP to clear standing head and selection ring */
+}

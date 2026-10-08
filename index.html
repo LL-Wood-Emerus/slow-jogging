@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>超慢跑 Q版陪伴 (Slow Jogging Companion)</title>
+  <!-- Google Fonts & Tailwind CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Zen Maru Gothic"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="style.css?v=90">
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col justify-center items-center select-none overflow-x-hidden p-2 sm:p-4">
+
+  <!-- App Main Container (Clean Light Theme) -->
+  <div id="app" class="relative w-full max-w-4xl h-[680px] bg-gradient-to-br from-rose-50/90 via-white to-amber-50/60 rounded-3xl shadow-2xl overflow-hidden border-4 border-rose-200/80 flex flex-col">
+
+    <!-- Screen 1: 待機起點與設定雙階段畫面 -->
+    <div id="screen-standby" class="screen relative flex-1 flex flex-col justify-between overflow-hidden">
+      
+      <!-- STAGE 1: 起始選擇角色畫面 (Local Comfy Desktop High-Res Artwork + Clean Selection) -->
+      <div id="stage-char-select" class="absolute inset-0 p-6 md:p-8 flex flex-col justify-between z-10 transition-all duration-500 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2)), url('assets/cabin_bg.png');">
+        
+        <!-- Header Title & Confirm Button at Top (Moved down to Blue Box area) -->
+        <div class="text-center space-y-2 z-20 pt-12 md:pt-16">
+          <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/90 text-rose-600 border border-rose-200 text-xs md:text-sm font-bold tracking-wider shadow-sm">
+            🏃‍♀️ 超慢跑陪伴 SLOW JOGGING
+          </div>
+          <h1 class="text-3xl md:text-4xl font-extrabold text-rose-700 tracking-wide drop-shadow-sm mt-1">
+            選擇夥伴
+          </h1>
+          <!-- Confirm Button inside Blue Box area -->
+          <div class="pt-2 flex justify-center">
+            <button id="btn-confirm-char" class="py-2 px-10 rounded-2xl border-2 border-rose-600 bg-white hover:bg-rose-50 text-rose-600 font-extrabold text-base md:text-lg shadow-lg transform hover:scale-105 active:scale-95 transition flex items-center justify-center gap-1">
+              <span>確定</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3 Characters Standing/Sitting at Bottom Floor (Blue Line Position) -->
+        <div class="relative flex-1 flex items-end justify-center pb-2">
+          <div class="grid grid-cols-3 gap-2 md:gap-6 w-full max-w-2xl z-20 items-end px-2 mb-1">
+            
+            <!-- Character 0: Saya (Dark Slate) -->
+            <div class="char-select-card cursor-pointer p-2 rounded-3xl transition-all duration-300 flex flex-col items-center justify-end group relative" data-char="0">
+              <div class="char-ring hidden absolute -inset-2 border-2 border-dashed border-rose-500 rounded-3xl bg-rose-500/10 pointer-events-none animate-pulse"></div>
+              <!-- Name Above Head -->
+              <div class="text-xl md:text-2xl font-black text-slate-800 tracking-wider mb-1 drop-shadow">Saya</div>
+              <canvas id="stage-char-canvas-0" width="160" height="210" class="drop-shadow-md transition-transform duration-300"></canvas>
+            </div>
+
+            <!-- Character 1: Sheath (Ocean Blue #00a8ff) -->
+            <div class="char-select-card cursor-pointer p-2 rounded-3xl transition-all duration-300 flex flex-col items-center justify-end group relative" data-char="1">
+              <div class="char-ring hidden absolute -inset-2 border-2 border-dashed border-sky-500 rounded-3xl bg-sky-500/10 pointer-events-none animate-pulse"></div>
+              <!-- Name Above Head -->
+              <div class="text-xl md:text-2xl font-black text-sky-600 tracking-wider mb-1 drop-shadow">Sheath</div>
+              <canvas id="stage-char-canvas-1" width="160" height="210" class="drop-shadow-md transition-transform duration-300"></canvas>
+            </div>
+
+            <!-- Character 2: Hiiragi (Coral Red #ff4d4d) -->
+            <div class="char-select-card cursor-pointer p-2 rounded-3xl transition-all duration-300 flex flex-col items-center justify-end group relative" data-char="2">
+              <div class="char-ring hidden absolute -inset-2 border-2 border-dashed border-rose-500 rounded-3xl bg-rose-500/10 pointer-events-none animate-pulse"></div>
+              <!-- Name Above Head -->
+              <div class="text-xl md:text-2xl font-black text-rose-600 tracking-wider mb-1 drop-shadow">Hiiragi</div>
+              <canvas id="stage-char-canvas-2" width="160" height="210" class="drop-shadow-md transition-transform duration-300"></canvas>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- STAGE 2: 運動設定畫面半透明疊加與即時風景預覽 (Live Scene Preview + Glassmorphism Panel) -->
+      <div id="stage-settings-overlay" class="hidden absolute inset-0 z-30 flex items-center justify-center p-4 md:p-6 transition-all duration-500 animate-bounce-in">
+        
+        <!-- Live Scene Background Preview Container -->
+        <div id="settings-preview-bg" class="absolute inset-0 bg-cover bg-center transition-all duration-500"></div>
+        <div class="absolute inset-0 bg-slate-900/30 backdrop-blur-sm"></div>
+
+        <!-- Settings Panel Glassmorphism Card (Semi-Transparent) -->
+        <div class="relative w-full max-w-3xl bg-white/75 backdrop-blur-lg border-2 border-white/90 rounded-3xl p-5 md:p-7 shadow-2xl flex flex-col justify-between space-y-4 max-h-full overflow-y-auto text-slate-800 z-10 transition-all duration-300">
+          
+          <!-- Top Header inside Settings -->
+          <div class="flex items-center justify-between border-b border-rose-200/60 pb-3">
+            <div class="flex items-center gap-3">
+              <div id="selected-char-thumb" class="w-11 h-11 rounded-2xl bg-white/90 border border-rose-300 flex items-center justify-center text-2xl shadow-sm">🍵</div>
+              <div>
+                <h2 class="text-2xl font-black text-rose-700 tracking-wide drop-shadow-sm">
+                  準備運動囉！
+                </h2>
+                <div id="selected-char-desc" class="text-xs text-slate-700 font-extrabold">已選擇夥伴：Saya</div>
+              </div>
+            </div>
+            
+            <!-- Re-select Character Button -->
+            <button id="btn-reselect-char" class="px-3.5 py-1.5 rounded-xl bg-white/90 hover:bg-white text-rose-600 text-xs font-bold border border-rose-200 transition flex items-center gap-1 shadow-sm">
+              <span>🔄</span>
+              <span>重選夥伴</span>
+            </button>
+          </div>
+
+          <!-- Settings Form Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            
+            <!-- Left Column: Scene & BGM Selection -->
+            <div class="bg-white/60 p-4 rounded-2xl border border-white/80 space-y-3 shadow-sm">
+              <label class="text-xs font-bold text-rose-700 block">🏞️ 風景 & BGM 氛圍</label>
+              <div class="grid grid-cols-1 gap-2">
+                <button class="scene-opt-btn btn-active px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-left text-xs font-bold transition shadow-sm" data-scene="sakura">
+                  <div class="text-rose-600">🌸 櫻花大道</div>
+                  <div class="text-[10px] text-slate-500 font-normal">溫馨 Lo-Fi 輕音樂</div>
+                </button>
+                <button class="scene-opt-btn px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-left text-xs font-bold transition shadow-sm" data-scene="forest">
+                  <div class="text-emerald-600">🌲 綠意森林</div>
+                  <div class="text-[10px] text-slate-500 font-normal">自然木吉他風</div>
+                </button>
+                <button class="scene-opt-btn px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-left text-xs font-bold transition shadow-sm" data-scene="cyber">
+                  <div class="text-cyan-600">🌌 夢幻星空</div>
+                  <div class="text-[10px] text-slate-500 font-normal">柔和電子拍</div>
+                </button>
+                <button class="scene-opt-btn px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-left text-xs font-bold transition shadow-sm" data-scene="maple">
+                  <div class="text-amber-600">🍁 楓之谷步道</div>
+                  <div class="text-[10px] text-slate-500 font-normal">冒險輕快樂</div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Right Column: Settings & Controls -->
+            <div class="bg-amber-50/40 p-4 rounded-2xl border border-amber-100/80 space-y-3.5 flex flex-col justify-between">
+              
+              <!-- Target Duration (15, 30, 45, 60 min) -->
+              <div>
+                <label class="text-xs font-bold text-slate-700 mb-1.5 block">⏱️ 跑步時間長度</label>
+                <div class="grid grid-cols-4 gap-1.5">
+                  <button class="time-opt-btn btn-active px-2 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-bold transition text-center shadow-sm" data-time="900">15 分鐘</button>
+                  <button class="time-opt-btn px-2 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-bold transition text-center shadow-sm" data-time="1800">30 分鐘</button>
+                  <button class="time-opt-btn px-2 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-bold transition text-center shadow-sm" data-time="2700">45 分鐘</button>
+                  <button class="time-opt-btn px-2 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-bold transition text-center shadow-sm" data-time="3600">60 分鐘</button>
+                </div>
+              </div>
+
+              <!-- BPM Slider -->
+              <div>
+                <div class="flex justify-between items-center text-xs font-bold mb-1">
+                  <span class="text-slate-700">🥁 節拍速度 (BPM)</span>
+                  <span id="bpm-display-val" class="text-rose-600 text-sm font-extrabold">180 BPM</span>
+                </div>
+                <input type="range" id="bpm-slider" min="120" max="240" value="180" class="w-full accent-rose-500 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+              </div>
+
+              <!-- Metronome Sound Tone Selector & Preview -->
+              <div>
+                <div class="flex justify-between items-center mb-1.5">
+                  <label class="text-xs font-bold text-slate-700">🔔 節拍器音色 (Metronome Sound)</label>
+                  <button id="btn-preview-metro" class="text-[11px] bg-amber-100 hover:bg-amber-200 text-amber-800 border border-amber-300 px-2 py-0.5 rounded-lg transition font-bold flex items-center gap-1 active:scale-95 shadow-sm">
+                    <span>🔊</span>
+                    <span>試聽節拍</span>
+                  </button>
+                </div>
+                <div class="grid grid-cols-4 gap-1.5">
+                  <button class="tone-opt-btn btn-active px-2 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-bold transition text-center shadow-sm" data-tone="woodblock">🪵 木魚</button>
+                  <button class="tone-opt-btn px-2 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-bold transition text-center shadow-sm" data-tone="rimshot">🥁 鼓邊</button>
+                  <button class="tone-opt-btn px-2 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-bold transition text-center shadow-sm" data-tone="tick">⏱️ 滴答</button>
+                  <button class="tone-opt-btn px-2 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-bold transition text-center shadow-sm" data-tone="beep">⚡ 電子</button>
+                </div>
+              </div>
+
+              <!-- Volumes Grid -->
+              <div class="grid grid-cols-2 gap-3 pt-2 border-t border-slate-200/80">
+                <div>
+                  <div class="flex justify-between items-center text-[11px] font-bold text-slate-700 mb-1">
+                    <span>🎵 BGM 音量</span>
+                    <button id="btn-mute-bgm" class="text-[10px] bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300 px-1.5 py-0.5 rounded transition font-bold">
+                      <span>靜音BGM</span>
+                    </button>
+                    <span id="bgm-vol-val">60%</span>
+                  </div>
+                  <input type="range" id="bgm-vol-slider" min="0" max="100" value="60" class="w-full accent-emerald-500 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                </div>
+                <div>
+                  <div class="flex justify-between text-[11px] font-bold text-slate-700 mb-1">
+                    <span>🔔 節拍器音量</span>
+                    <span id="metro-vol-val">80%</span>
+                  </div>
+                  <input type="range" id="metro-vol-slider" min="0" max="100" value="80" class="w-full accent-amber-500 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- START RUNNING BUTTON inside Settings Modal -->
+          <button id="btn-start-run" class="w-full py-4 rounded-2xl bg-gradient-to-r from-rose-500 via-pink-500 to-amber-500 hover:from-rose-400 hover:to-amber-400 text-white font-black text-xl tracking-wider shadow-lg shadow-rose-500/20 transform hover:-translate-y-0.5 active:translate-y-0 transition flex items-center justify-center gap-2 group mt-2">
+            <span>🚀</span>
+            <span>開始超慢跑！</span>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Screen 2: 開始跑步畫面 (Running Screen + Canvas Stage) -->
+    <div id="screen-running" class="screen hidden absolute inset-0 flex flex-col justify-between z-20">
+      
+      <!-- Main Canvas Stage (Side Scroller) -->
+      <canvas id="stage-canvas" class="absolute inset-0 w-full h-full object-cover"></canvas>
+
+      <!-- Speech Bubble Container (Floating overlay) -->
+      <div id="speech-bubble" class="speech-bubble hidden absolute z-30 pointer-events-none transition-all duration-300 transform -translate-x-1/2 -translate-y-full">
+        <div class="bg-white/95 text-slate-800 text-xs md:text-sm font-bold px-4 py-2 rounded-2xl shadow-xl border-2 border-rose-300 relative">
+          <span id="speech-text">保持 180 步頻！腳掌輕輕著地~ ✨</span>
+          <!-- Speech Arrow -->
+          <div class="absolute left-1/2 -bottom-2 -translate-x-1/2 w-0 h-0 border-x-8 border-x-transparent border-t-8 border-t-white"></div>
+        </div>
+      </div>
+
+      <!-- Countdown Overlay -->
+      <div id="countdown-overlay" class="hidden absolute inset-0 bg-slate-900/60 backdrop-blur-md z-40 flex flex-col items-center justify-center">
+        <div id="countdown-num" class="text-8xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-br from-rose-400 to-amber-300 animate-pulse">
+          3
+        </div>
+        <div class="text-white text-lg font-bold mt-4 tracking-widest drop-shadow">微開雙腳，調整姿勢...</div>
+      </div>
+
+      <!-- Top Running HUD / Control Bar (Clean Light Backdrop) -->
+      <div class="relative z-30 p-4 bg-white/80 backdrop-blur-md border-b border-rose-200/60 flex flex-wrap items-center justify-between gap-3 text-slate-800 shadow-sm">
+        
+        <!-- Left Stats -->
+        <div class="flex items-center gap-4">
+          <!-- Timer -->
+          <div class="flex items-center gap-2">
+            <span class="text-2xl">⏱️</span>
+            <div>
+              <div class="text-[10px] text-slate-500 uppercase font-bold tracking-wider">剩餘時間</div>
+              <div id="hud-timer-val" class="text-2xl font-black text-rose-600 tracking-wider font-mono">15:00</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Quick Controls -->
+        <div class="flex items-center gap-2.5">
+          
+          <!-- Live BPM Controller -->
+          <div class="hidden md:flex items-center gap-2 bg-rose-50 px-3 py-1.5 rounded-xl border border-rose-200">
+            <span class="text-xs font-bold text-rose-700">BPM</span>
+            <input type="range" id="hud-bpm-slider" min="120" max="240" value="180" class="w-20 accent-rose-500 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+            <span id="hud-bpm-val" class="text-xs font-bold text-rose-600 font-mono w-10">180</span>
+          </div>
+
+          <!-- Audio Mini Toggles Button -->
+          <button id="btn-toggle-audio-panel" class="p-2 rounded-xl bg-white border border-rose-200 hover:bg-rose-50 text-slate-700 text-sm font-bold transition flex items-center gap-1 shadow-sm">
+            <span>🎛️</span>
+            <span class="hidden sm:inline text-xs">音量調節</span>
+          </button>
+
+          <!-- Pause / Resume Button -->
+          <button id="btn-pause-run" class="px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-900 font-black text-xs transition flex items-center gap-1 shadow">
+            <span id="pause-icon">⏸️</span>
+            <span id="pause-text">暫停</span>
+          </button>
+
+          <!-- Cancel / Back to Standby Button -->
+          <button id="btn-cancel-run" class="px-3.5 py-2 rounded-xl bg-rose-100 hover:bg-rose-200 text-rose-700 border border-rose-300 font-black text-xs transition flex items-center gap-1 shadow-sm">
+            <span>🏠</span>
+            <span>取消 / 回待機</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Audio Slider Drawer (Floating Light Theme) -->
+      <div id="audio-panel-drawer" class="hidden absolute top-20 right-4 z-40 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-rose-200 shadow-2xl w-64 space-y-3 text-slate-800">
+        <div class="text-xs font-bold text-rose-700 flex justify-between items-center">
+          <span>🎛️ 即時音效控制</span>
+          <button id="btn-close-audio-panel" class="text-slate-400 hover:text-slate-700 font-bold">✕</button>
+        </div>
+        <!-- Mobile BPM Slider inside Drawer -->
+        <div class="block md:hidden">
+          <div class="flex justify-between text-xs font-bold text-slate-700 mb-1">
+            <span>🥁 節拍速度 (BPM)</span>
+            <span id="drawer-bpm-val" class="text-rose-600 font-mono">180</span>
+          </div>
+          <input type="range" id="drawer-bpm-slider" min="120" max="240" value="180" class="w-full accent-rose-500 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+        </div>
+        <div>
+          <div class="flex justify-between text-xs font-bold text-slate-700 mb-1">
+            <span>🎵 BGM 音量</span>
+            <span id="hud-bgm-val" class="text-emerald-600 font-mono">60%</span>
+          </div>
+          <input type="range" id="hud-bgm-slider" min="0" max="100" value="60" class="w-full accent-emerald-500 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+        </div>
+        <div>
+          <div class="flex justify-between text-xs font-bold text-slate-700 mb-1">
+            <span>🔔 節拍器音量</span>
+            <span id="hud-metro-val" class="text-amber-600 font-mono">80%</span>
+          </div>
+          <input type="range" id="hud-metro-slider" min="0" max="100" value="80" class="w-full accent-amber-500 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Screen 3: 跑步結束慶祝畫面 (Victory Screen Modal - Light Theme) -->
+    <div id="screen-celebrate" class="screen hidden absolute inset-0 bg-slate-900/40 backdrop-blur-lg z-50 flex flex-col items-center justify-center p-6 text-center">
+      
+      <div class="max-w-md w-full bg-white/95 border-2 border-rose-300 rounded-3xl p-8 shadow-2xl space-y-6 relative overflow-hidden animate-bounce-in text-slate-800">
+        
+        <!-- Victory Confetti & Glow Background Effect -->
+        <div class="absolute -top-24 -left-24 w-48 h-48 bg-rose-400/20 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-amber-400/20 rounded-full blur-3xl"></div>
+
+        <!-- Trophy & Title -->
+        <div>
+          <div class="text-6xl my-2 animate-bounce">🏆</div>
+          <h2 class="text-3xl font-black text-rose-600">
+            超慢跑目標達成！
+          </h2>
+          <p id="celebrate-subtitle" class="text-slate-600 text-xs mt-1 font-bold">太棒了！今天也成功維持運動！</p>
+        </div>
+
+        <!-- Stats Summary Box -->
+        <div class="bg-rose-50/70 p-4 rounded-2xl border border-rose-200 flex flex-col items-center justify-center shadow-sm">
+          <div class="text-xs text-rose-700 font-bold uppercase tracking-wider">🎉 慢跑總時間</div>
+          <div id="res-time-val" class="text-3xl font-black text-rose-600 font-mono mt-1">15:00</div>
+        </div>
+
+        <!-- Character Victory Canvas -->
+        <div class="flex justify-center my-2">
+          <canvas id="char-celebrate-canvas" width="180" height="150" class="drop-shadow-md"></canvas>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="grid grid-cols-2 gap-3 pt-2">
+          <button id="btn-run-again" class="py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-800 font-bold text-sm transition flex items-center justify-center gap-1 shadow-sm">
+            <span>🔄</span>
+            <span>再跑一次</span>
+          </button>
+          <button id="btn-back-standby" class="py-3 px-4 rounded-xl bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-400 hover:to-amber-400 text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-1">
+            <span>🏠</span>
+            <span>回到待機</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Application Modules -->
+  <script src="js/state.js?v=90"></script>
+  <script src="js/audio.js?v=90"></script>
+  <script src="js/characters.js?v=90"></script>
+  <script src="js/scenes.js?v=90"></script>
+  <script src="js/stage.js?v=90"></script>
+  <script src="js/speech.js?v=90"></script>
+  <script src="js/ui.js?v=90"></script>
+  <script src="app.js?v=90"></script>
+</body>
+</html>

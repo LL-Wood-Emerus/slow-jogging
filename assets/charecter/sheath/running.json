@@ -1,0 +1,332 @@
+{
+  "schemaVersion": 1,
+  "assetVersion": "release-v1",
+  "characterId": "saya",
+  "state": "running",
+  "status": "approved",
+  "image": "running.png",
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "columns": 4,
+  "rows": 5,
+  "frameCount": 18,
+  "indexBase": 0,
+  "order": "row-major",
+  "durationsMs": [
+    55.55555555555556,
+    55.55555555555556,
+    55.55555555555556,
+    55.55555555555556,
+    55.55555555555556,
+    55.55555555555556,
+    55.55555555555556,
+    55.55555555555556,
+    55.55555555555556,
+    55.55555555555556,
+    55.55555555555556,
+    55.55555555555556,
+    55.55555555555556,
+    55.55555555555556,
+    55.55555555555556,
+    55.55555555555556,
+    55.55555555555556,
+    55.55555555555556
+  ],
+  "loop": true,
+  "nextState": null,
+  "anchor": [
+    256,
+    464
+  ],
+  "background": "white",
+  "colorSpace": "sRGB",
+  "facing": "right",
+  "sourceRoot": "../../",
+  "source": "生成輔助資料/跑步/Gemini重製/慢跑重試/source.mp4",
+  "sourceFps": 24,
+  "sourceFrameIndexBase": 1,
+  "sourceFrames": [
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    80,
+    82,
+    84
+  ],
+  "sourceTimestampsSeconds": [
+    2.5833333333333335,
+    2.625,
+    2.6666666666666665,
+    2.7083333333333335,
+    2.75,
+    2.7916666666666665,
+    2.875,
+    2.9166666666666665,
+    2.9583333333333335,
+    3.0,
+    3.0416666666666665,
+    3.0833333333333335,
+    3.125,
+    3.1666666666666665,
+    3.2083333333333335,
+    3.2916666666666665,
+    3.375,
+    3.4583333333333335
+  ],
+  "normalization": {
+    "scale": 0.7,
+    "sourceCrop": [
+      380,
+      0,
+      820,
+      720
+    ],
+    "offset": [
+      94,
+      -5
+    ],
+    "perFrameAutoScale": false
+  },
+  "frames": [
+    {
+      "index": 0,
+      "rect": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-001.png",
+      "durationMs": 55.55555555555556
+    },
+    {
+      "index": 1,
+      "rect": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-002.png",
+      "durationMs": 55.55555555555556
+    },
+    {
+      "index": 2,
+      "rect": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-003.png",
+      "durationMs": 55.55555555555556
+    },
+    {
+      "index": 3,
+      "rect": [
+        1536,
+        0,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-004.png",
+      "durationMs": 55.55555555555556
+    },
+    {
+      "index": 4,
+      "rect": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-005.png",
+      "durationMs": 55.55555555555556
+    },
+    {
+      "index": 5,
+      "rect": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-006.png",
+      "durationMs": 55.55555555555556
+    },
+    {
+      "index": 6,
+      "rect": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-007.png",
+      "durationMs": 55.55555555555556
+    },
+    {
+      "index": 7,
+      "rect": [
+        1536,
+        512,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-008.png",
+      "durationMs": 55.55555555555556
+    },
+    {
+      "index": 8,
+      "rect": [
+        0,
+        1024,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-009.png",
+      "durationMs": 55.55555555555556
+    },
+    {
+      "index": 9,
+      "rect": [
+        512,
+        1024,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-010.png",
+      "durationMs": 55.55555555555556
+    },
+    {
+      "index": 10,
+      "rect": [
+        1024,
+        1024,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-011.png",
+      "durationMs": 55.55555555555556
+    },
+    {
+      "index": 11,
+      "rect": [
+        1536,
+        1024,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-012.png",
+      "durationMs": 55.55555555555556
+    },
+    {
+      "index": 12,
+      "rect": [
+        0,
+        1536,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-013.png",
+      "durationMs": 55.55555555555556
+    },
+    {
+      "index": 13,
+      "rect": [
+        512,
+        1536,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-014.png",
+      "durationMs": 55.55555555555556
+    },
+    {
+      "index": 14,
+      "rect": [
+        1024,
+        1536,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-015.png",
+      "durationMs": 55.55555555555556
+    },
+    {
+      "index": 15,
+      "rect": [
+        1536,
+        1536,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-016.png",
+      "durationMs": 55.55555555555556
+    },
+    {
+      "index": 16,
+      "rect": [
+        0,
+        2048,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-017.png",
+      "durationMs": 55.55555555555556
+    },
+    {
+      "index": 17,
+      "rect": [
+        512,
+        2048,
+        512,
+        512
+      ],
+      "file": "frames/running/frame-018.png",
+      "durationMs": 55.55555555555556
+    }
+  ],
+  "retiming": {
+    "method": "equal half-cycles",
+    "halfCycleMs": 500,
+    "transitionFramesOneBased": [
+      1,
+      10
+    ],
+    "nearArmForwardFramesOneBased": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "farArmForwardFramesOneBased": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+    ]
+  },
+  "approvedOn": "2026-10-06",
+  "derivedFrom": "v004"
+}

@@ -1,0 +1,250 @@
+{
+  "schemaVersion": 1,
+  "assetVersion": "release-v1",
+  "characterId": "saya",
+  "state": "celebration",
+  "status": "approved",
+  "image": "celebration.png",
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "columns": 4,
+  "rows": 4,
+  "frameCount": 16,
+  "indexBase": 0,
+  "order": "row-major",
+  "durationsMs": [
+    150,
+    100,
+    100,
+    100,
+    100,
+    100,
+    150,
+    200,
+    250,
+    200,
+    150,
+    100,
+    100,
+    100,
+    100,
+    250
+  ],
+  "loop": false,
+  "nextState": "idle",
+  "anchor": [
+    256,
+    464
+  ],
+  "background": "white",
+  "colorSpace": "sRGB",
+  "facing": "reference-angle-toward-viewer",
+  "frames": [
+    {
+      "index": 0,
+      "rect": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "file": "frames/celebration/frame-001.png",
+      "durationMs": 150
+    },
+    {
+      "index": 1,
+      "rect": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "file": "frames/celebration/frame-002.png",
+      "durationMs": 100
+    },
+    {
+      "index": 2,
+      "rect": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "file": "frames/celebration/frame-003.png",
+      "durationMs": 100
+    },
+    {
+      "index": 3,
+      "rect": [
+        1536,
+        0,
+        512,
+        512
+      ],
+      "file": "frames/celebration/frame-004.png",
+      "durationMs": 100
+    },
+    {
+      "index": 4,
+      "rect": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "file": "frames/celebration/frame-005.png",
+      "durationMs": 100
+    },
+    {
+      "index": 5,
+      "rect": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "file": "frames/celebration/frame-006.png",
+      "durationMs": 100
+    },
+    {
+      "index": 6,
+      "rect": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "file": "frames/celebration/frame-007.png",
+      "durationMs": 150
+    },
+    {
+      "index": 7,
+      "rect": [
+        1536,
+        512,
+        512,
+        512
+      ],
+      "file": "frames/celebration/frame-008.png",
+      "durationMs": 200
+    },
+    {
+      "index": 8,
+      "rect": [
+        0,
+        1024,
+        512,
+        512
+      ],
+      "file": "frames/celebration/frame-009.png",
+      "durationMs": 250
+    },
+    {
+      "index": 9,
+      "rect": [
+        512,
+        1024,
+        512,
+        512
+      ],
+      "file": "frames/celebration/frame-010.png",
+      "durationMs": 200
+    },
+    {
+      "index": 10,
+      "rect": [
+        1024,
+        1024,
+        512,
+        512
+      ],
+      "file": "frames/celebration/frame-011.png",
+      "durationMs": 150
+    },
+    {
+      "index": 11,
+      "rect": [
+        1536,
+        1024,
+        512,
+        512
+      ],
+      "file": "frames/celebration/frame-012.png",
+      "durationMs": 100
+    },
+    {
+      "index": 12,
+      "rect": [
+        0,
+        1536,
+        512,
+        512
+      ],
+      "file": "frames/celebration/frame-013.png",
+      "durationMs": 100
+    },
+    {
+      "index": 13,
+      "rect": [
+        512,
+        1536,
+        512,
+        512
+      ],
+      "file": "frames/celebration/frame-014.png",
+      "durationMs": 100
+    },
+    {
+      "index": 14,
+      "rect": [
+        1024,
+        1536,
+        512,
+        512
+      ],
+      "file": "frames/celebration/frame-015.png",
+      "durationMs": 100
+    },
+    {
+      "index": 15,
+      "rect": [
+        1536,
+        1536,
+        512,
+        512
+      ],
+      "file": "frames/celebration/frame-016.png",
+      "durationMs": 250
+    }
+  ],
+  "source": "生成輔助資料/慶祝/Gemini/keyframes16-white",
+  "normalization": {
+    "scale": 0.655,
+    "sourceAnchor": [
+      640,
+      660
+    ],
+    "perFrameAutoScale": false
+  },
+  "sourceFrames1Based": [
+    25,
+    37,
+    43,
+    49,
+    55,
+    61,
+    67,
+    79,
+    97,
+    121,
+    145,
+    157,
+    163,
+    169,
+    181,
+    193
+  ],
+  "sourceRoot": "../../",
+  "approvedOn": "2026-10-06",
+  "derivedFrom": "v001"
+}
