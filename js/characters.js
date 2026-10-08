@@ -191,11 +191,12 @@ class CharacterManager {
     ctx.save();
     ctx.translate(x, y);
 
-    // Dynamic ground shadow for strolling character (subtle & neat)
-    const shadowW = width * 0.18;
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+    // Dynamic ground shadow for strolling character (moved down & expanded vertically)
+    const shadowW = width * 0.22;
+    const shadowH = 11;
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.18)';
     ctx.beginPath();
-    ctx.ellipse(0, -5, shadowW, 6, 0, 0, Math.PI * 2);
+    ctx.ellipse(0, 2, shadowW, shadowH, 0, 0, Math.PI * 2);
     ctx.fill();
 
     // Render 512x512 sprite frame
