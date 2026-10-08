@@ -12,7 +12,23 @@ const STAGE_LAYOUT_CONFIG = {
   frame3: { x: 1145, y: 170, width: 430, height: 295 },
   
   // Character on treadmill fixed pixels
-  character: { x: 1360, y: 865, width: 300, height: 300 }
+  character: { x: 1360, y: 865, width: 300, height: 300 },
+
+  // Walkable floor area polygon for background walking characters
+  walkArea: {
+    polygon: [
+      { x: 127, y: 799 }, // Top-Left
+      { x: 648, y: 798 }, // Top-Right
+      { x: 698, y: 885 }, // Bottom-Right
+      { x: 190, y: 884 }  // Bottom-Left
+    ],
+    bounds: {
+      minX: 127,
+      maxX: 698,
+      minY: 798,
+      maxY: 885
+    }
+  }
 };
 
 class StageRenderer {
