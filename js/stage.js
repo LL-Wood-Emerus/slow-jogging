@@ -305,8 +305,8 @@ class StageRenderer {
     const bounceOffset = (charState === 'running' && !state.isPaused) ? -Math.sin(tau * Math.PI) * 12 : 0;
     const tiltAngle = 0;
 
-    // Shadow position moved UP to align directly underneath shoe soles in sprite frame
-    const shadowY = charY - 38;
+    // Shadow position lowered 10px to charY - 28 for precise foot alignment
+    const shadowY = charY - 28;
 
     // Draw Unified Dynamic Ground Shadow
     charMgr.drawUnifiedGroundShadow(ctx, charX, shadowY, charWidth, bounceOffset);
