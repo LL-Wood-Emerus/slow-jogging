@@ -109,9 +109,12 @@ class StrollingManager {
     this.strollers.sort((a, b) => a.y - b.y);
 
     this.strollers.forEach(stroller => {
-      if (!isPaused) {
-        stroller.animTime += dt * 1000;
+      stroller.animTime += dt * 1000;
 
+      let activeDir = stroller.dir;
+      if (isPaused) {
+        activeDir = 'idle';
+      } else {
         // Move towards target continuously (no pause)
         const dx = stroller.targetX - stroller.x;
         const dy = stroller.targetY - stroller.y;
@@ -149,7 +152,7 @@ class StrollingManager {
       charMgr.drawStrollFrame(
         ctx,
         stroller.charIndex,
-        stroller.dir,
+        activeDir,
         stroller.animTime,
         stroller.x,
         stroller.y,

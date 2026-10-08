@@ -56,8 +56,10 @@ class CharacterManager {
     // Load stroll sprite sheets (2048 x 512, 4 frames of 512 x 512)
     const strollL = await this.loadImage(`assets/charecter/stroll/${id}/stroll_l.png`);
     const strollR = await this.loadImage(`assets/charecter/stroll/${id}/stroll_r.png`);
+    const strollIdle = await this.loadImage(`assets/charecter/stroll/${id}/stroll_idle.png`);
     states['stroll_l'] = { image: strollL };
     states['stroll_r'] = { image: strollR };
+    states['stroll_idle'] = { image: strollIdle };
 
     this.characters[id] = { config, states };
   }
@@ -178,8 +180,11 @@ class CharacterManager {
     const charData = this.characters[charId];
     if (!charData) return;
 
-    const stateKey = (dir === 'l') ? 'stroll_l' : 'stroll_r';
-    const sData = charData.states[stateKey];
+    let stateKey = 'stroll_idle';
+    if (dir === 'l') stateKey = 'stroll_l';
+    else if (dir === 'r') stateKey = 'stroll_r';
+
+    const sData = charData.states[stateKey] || charData.states['stroll_idle'];
     if (!sData || !sData.image) return;
 
     const img = sData.image;
