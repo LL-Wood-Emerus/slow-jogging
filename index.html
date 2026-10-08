@@ -20,18 +20,18 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="style.css?v=90">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col justify-center items-center select-none overflow-x-hidden p-2 sm:p-4">
 
-  <!-- App Main Container (Clean Light Theme) -->
-  <div id="app" class="relative w-full max-w-4xl h-[680px] bg-gradient-to-br from-rose-50/90 via-white to-amber-50/60 rounded-3xl shadow-2xl overflow-hidden border-4 border-rose-200/80 flex flex-col">
+  <!-- App Main Container (Fixed 16:9 Aspect Ratio matching 1699x960 Room Images) -->
+  <div id="app" class="relative w-full max-w-5xl aspect-[16/9] bg-gradient-to-br from-rose-50/90 via-white to-amber-50/60 rounded-3xl shadow-2xl overflow-hidden border-4 border-rose-200/80 flex flex-col">
 
     <!-- Screen 1: 待機起點與設定雙階段畫面 -->
     <div id="screen-standby" class="screen relative flex-1 flex flex-col justify-between overflow-hidden">
       
-      <!-- STAGE 1: 起始選擇角色畫面 (Local Comfy Desktop High-Res Artwork + Clean Selection) -->
-      <div id="stage-char-select" class="absolute inset-0 p-6 md:p-8 flex flex-col justify-between z-10 transition-all duration-500 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2)), url('assets/cabin_bg.png');">
+      <!-- STAGE 1: 起始選擇角色畫面 (Home Room) -->
+      <div id="stage-char-select" class="absolute inset-0 px-6 pt-6 pb-0 md:px-8 md:pt-8 md:pb-0 flex flex-col justify-between z-10 transition-all duration-500 bg-center" style="background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)), url('assets/home.jpeg'); background-size: 100% 100%;">
         
         <!-- Header Title & Confirm Button at Top (Moved down to Blue Box area) -->
         <div class="text-center space-y-2 z-20 pt-12 md:pt-16">
@@ -43,38 +43,38 @@
           </h1>
           <!-- Confirm Button inside Blue Box area -->
           <div class="pt-2 flex justify-center">
-            <button id="btn-confirm-char" class="py-2 px-10 rounded-2xl border-2 border-rose-600 bg-white hover:bg-rose-50 text-rose-600 font-extrabold text-base md:text-lg shadow-lg transform hover:scale-105 active:scale-95 transition flex items-center justify-center gap-1">
+            <button id="btn-confirm-char" disabled class="py-2 px-10 rounded-2xl border-2 border-slate-300 bg-slate-200 text-slate-400 font-extrabold text-base md:text-lg opacity-40 cursor-not-allowed pointer-events-none transition flex items-center justify-center gap-1">
               <span>確定</span>
             </button>
           </div>
         </div>
 
-        <!-- 3 Characters Standing/Sitting at Bottom Floor (Blue Line Position) -->
-        <div class="relative flex-1 flex items-end justify-center pb-2">
-          <div class="grid grid-cols-3 gap-2 md:gap-6 w-full max-w-2xl z-20 items-end px-2 mb-1">
+        <!-- 3 Characters Standing/Sitting at Bottom Floor (Shifted slightly up from bottom border) -->
+        <div class="relative flex-1 flex items-end justify-center pb-0 translate-y-2 md:translate-y-4">
+          <div class="grid grid-cols-3 gap-2 md:gap-6 w-full max-w-2xl z-20 items-end px-2 mb-0">
             
             <!-- Character 0: Saya (Dark Slate) -->
-            <div class="char-select-card cursor-pointer p-2 rounded-3xl transition-all duration-300 flex flex-col items-center justify-end group relative" data-char="0">
-              <div class="char-ring hidden absolute -inset-2 border-2 border-dashed border-rose-500 rounded-3xl bg-rose-500/10 pointer-events-none animate-pulse"></div>
-              <!-- Name Above Head -->
-              <div class="text-xl md:text-2xl font-black text-slate-800 tracking-wider mb-1 drop-shadow">Saya</div>
-              <canvas id="stage-char-canvas-0" width="160" height="210" class="drop-shadow-md transition-transform duration-300"></canvas>
+            <div class="char-select-card cursor-pointer p-1 rounded-3xl transition-all duration-300 flex flex-col items-center justify-end group relative" data-char="0">
+              <div class="char-ring hidden absolute inset-x-2 -top-3 bottom-5 border-2 border-dashed border-rose-500 rounded-2xl bg-rose-500/10 pointer-events-none animate-pulse"></div>
+              <!-- Name Above Head (Moves up on selection) -->
+              <div class="char-name-tag absolute left-1/2 -translate-x-1/2 text-lg md:text-xl font-black text-slate-800 tracking-wider drop-shadow z-20 whitespace-nowrap">Saya</div>
+              <canvas id="stage-char-canvas-0" width="220" height="230" class="drop-shadow-md transition-transform duration-300"></canvas>
             </div>
 
             <!-- Character 1: Sheath (Ocean Blue #00a8ff) -->
-            <div class="char-select-card cursor-pointer p-2 rounded-3xl transition-all duration-300 flex flex-col items-center justify-end group relative" data-char="1">
-              <div class="char-ring hidden absolute -inset-2 border-2 border-dashed border-sky-500 rounded-3xl bg-sky-500/10 pointer-events-none animate-pulse"></div>
-              <!-- Name Above Head -->
-              <div class="text-xl md:text-2xl font-black text-sky-600 tracking-wider mb-1 drop-shadow">Sheath</div>
-              <canvas id="stage-char-canvas-1" width="160" height="210" class="drop-shadow-md transition-transform duration-300"></canvas>
+            <div class="char-select-card cursor-pointer p-1 rounded-3xl transition-all duration-300 flex flex-col items-center justify-end group relative" data-char="1">
+              <div class="char-ring hidden absolute inset-x-2 top-2 bottom-1 border-2 border-dashed border-sky-500 rounded-2xl bg-sky-500/10 pointer-events-none animate-pulse"></div>
+              <!-- Name Above Head (Moves up on selection) -->
+              <div class="char-name-tag absolute left-1/2 -translate-x-1/2 text-lg md:text-xl font-black text-sky-600 tracking-wider drop-shadow z-20 whitespace-nowrap">Sheath</div>
+              <canvas id="stage-char-canvas-1" width="220" height="230" class="drop-shadow-md transition-transform duration-300"></canvas>
             </div>
 
             <!-- Character 2: Hiiragi (Coral Red #ff4d4d) -->
-            <div class="char-select-card cursor-pointer p-2 rounded-3xl transition-all duration-300 flex flex-col items-center justify-end group relative" data-char="2">
-              <div class="char-ring hidden absolute -inset-2 border-2 border-dashed border-rose-500 rounded-3xl bg-rose-500/10 pointer-events-none animate-pulse"></div>
-              <!-- Name Above Head -->
-              <div class="text-xl md:text-2xl font-black text-rose-600 tracking-wider mb-1 drop-shadow">Hiiragi</div>
-              <canvas id="stage-char-canvas-2" width="160" height="210" class="drop-shadow-md transition-transform duration-300"></canvas>
+            <div class="char-select-card cursor-pointer p-1 rounded-3xl transition-all duration-300 flex flex-col items-center justify-end group relative" data-char="2">
+              <div class="char-ring hidden absolute inset-x-2 top-2 bottom-1 border-2 border-dashed border-rose-500 rounded-2xl bg-rose-500/10 pointer-events-none animate-pulse"></div>
+              <!-- Name Above Head (Moves up on selection) -->
+              <div class="char-name-tag absolute left-1/2 -translate-x-1/2 text-lg md:text-xl font-black text-rose-600 tracking-wider drop-shadow z-20 whitespace-nowrap">Hiiragi</div>
+              <canvas id="stage-char-canvas-2" width="220" height="230" class="drop-shadow-md transition-transform duration-300"></canvas>
             </div>
 
           </div>
@@ -145,9 +145,9 @@
               <div>
                 <label class="text-xs font-bold text-slate-700 mb-1.5 block">⏱️ 跑步時間長度</label>
                 <div class="grid grid-cols-4 gap-1.5">
-                  <button class="time-opt-btn btn-active px-2 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-bold transition text-center shadow-sm" data-time="900">15 分鐘</button>
+                  <button class="time-opt-btn btn-active px-2 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-bold transition text-center shadow-sm" data-time="60">1 分鐘</button>
+                  <button class="time-opt-btn px-2 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-bold transition text-center shadow-sm" data-time="900">15 分鐘</button>
                   <button class="time-opt-btn px-2 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-bold transition text-center shadow-sm" data-time="1800">30 分鐘</button>
-                  <button class="time-opt-btn px-2 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-bold transition text-center shadow-sm" data-time="2700">45 分鐘</button>
                   <button class="time-opt-btn px-2 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-bold transition text-center shadow-sm" data-time="3600">60 分鐘</button>
                 </div>
               </div>
@@ -222,7 +222,7 @@
       <canvas id="stage-canvas" class="absolute inset-0 w-full h-full object-cover"></canvas>
 
       <!-- Speech Bubble Container (Floating overlay) -->
-      <div id="speech-bubble" class="speech-bubble hidden absolute z-30 pointer-events-none transition-all duration-300 transform -translate-x-1/2 -translate-y-full">
+      <div id="speech-bubble" class="speech-bubble hidden absolute z-30 pointer-events-none transition-opacity duration-300 transform -translate-x-1/2 -translate-y-full">
         <div class="bg-white/95 text-slate-800 text-xs md:text-sm font-bold px-4 py-2 rounded-2xl shadow-xl border-2 border-rose-300 relative">
           <span id="speech-text">保持 180 步頻！腳掌輕輕著地~ ✨</span>
           <!-- Speech Arrow -->
@@ -317,21 +317,21 @@
 
 
     <!-- Screen 3: 跑步結束慶祝畫面 (Victory Screen Modal - Light Theme) -->
-    <div id="screen-celebrate" class="screen hidden absolute inset-0 bg-slate-900/40 backdrop-blur-lg z-50 flex flex-col items-center justify-center p-6 text-center">
+    <div id="screen-celebrate" class="screen hidden absolute inset-0 bg-slate-900/40 backdrop-blur-lg z-50 flex flex-col items-center justify-center p-4 text-center overflow-y-auto">
       
-      <div class="max-w-md w-full bg-white/95 border-2 border-rose-300 rounded-3xl p-8 shadow-2xl space-y-6 relative overflow-hidden animate-bounce-in text-slate-800">
+      <div class="max-w-md w-full bg-white/95 border-2 border-rose-300 rounded-3xl p-5 md:p-6 shadow-2xl space-y-3 relative overflow-hidden animate-bounce-in text-slate-800 my-auto">
         
         <!-- Victory Confetti & Glow Background Effect -->
         <div class="absolute -top-24 -left-24 w-48 h-48 bg-rose-400/20 rounded-full blur-3xl"></div>
         <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-amber-400/20 rounded-full blur-3xl"></div>
 
-        <!-- Trophy & Title -->
+        <!-- Title (Trophy Removed) -->
         <div>
           <div class="text-6xl my-2 animate-bounce">🏆</div>
           <h2 class="text-3xl font-black text-rose-600">
             超慢跑目標達成！
           </h2>
-          <p id="celebrate-subtitle" class="text-slate-600 text-xs mt-1 font-bold">太棒了！今天也成功維持運動！</p>
+          <p id="celebrate-subtitle" class="text-slate-600 text-xs mt-1 font-bold">太棒了！今天也成功維持 180 步頻！</p>
         </div>
 
         <!-- Stats Summary Box -->
@@ -364,13 +364,31 @@
   </div>
 
   <!-- Application Modules -->
-  <script src="js/state.js?v=90"></script>
-  <script src="js/audio.js?v=90"></script>
-  <script src="js/characters.js?v=90"></script>
-  <script src="js/scenes.js?v=90"></script>
-  <script src="js/stage.js?v=90"></script>
-  <script src="js/speech.js?v=90"></script>
-  <script src="js/ui.js?v=90"></script>
-  <script src="app.js?v=90"></script>
+  <script src="js/state.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/characters.js"></script>
+  <script src="js/scenes.js"></script>
+  <script src="js/stage.js"></script>
+  <script src="js/speech.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+
+  <!-- Application Modules -->
+  <script src="js/state.js?v=30"></script>
+  <script src="js/audio.js?v=30"></script>
+  <script src="js/characters.js?v=30"></script>
+  <script src="js/scenes.js?v=30"></script>
+  <script src="js/stage.js?v=30"></script>
+  <script src="js/speech.js?v=30"></script>
+  <script src="js/ui.js?v=30"></script>
+  <script src="app.js?v=30"></script>
+</body>
+</html>
+
+  <script src="js/speech.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
