@@ -58,11 +58,19 @@ class StrollingManager {
     return { x: clampedX, y: clampedY };
   }
 
-  getRandomTarget() {
+  getRandomTarget(currentX, currentY) {
     const area = STAGE_LAYOUT_CONFIG.walkArea;
-    const rx = area.bounds.minX + Math.random() * (area.bounds.maxX - area.bounds.minX);
-    const ry = area.bounds.minY + Math.random() * (area.bounds.maxY - area.bounds.minY);
-    return this.getValidWalkPos(rx, ry);
+    let target;
+    let attempts = 0;
+    do {
+      const rx = area.bounds.minX + Math.random() * (area.bounds.maxX - area.bounds.minX);
+      const ry = area.bounds.minY + Math.random() * (area.bounds.maxY - area.bounds.minY);
+      target = this.getValidWalkPos(rx, ry);
+      attempts++;
+      if (currentX === undefined) break;
+    } while (attempts < 10 && Math.hypot(target.x - currentX, target.y - currentY) < 150);
+
+    return target;
   }
 
   init(runningCharIndex) {
@@ -78,7 +86,7 @@ class StrollingManager {
 
     strollIndices.forEach((charIdx, i) => {
       const startPos = this.getValidWalkPos(startPositions[i].x, startPositions[i].y);
-      const targetPos = this.getRandomTarget();
+      const targetPos = this.getRandomTarget(startPos.x, startPos.y);
       const dx = targetPos.x - startPos.x;
 
       this.strollers.push({
@@ -89,7 +97,6 @@ class StrollingManager {
         targetY: targetPos.y,
         dir: (dx < 0) ? 'l' : 'r',
         speed: 45 + Math.random() * 20, // 45~65 px/sec casual stroll speed
-        pauseTimer: 0,
         animTime: Math.random() * 1000
       });
     });
@@ -105,37 +112,32 @@ class StrollingManager {
       if (!isPaused) {
         stroller.animTime += dt * 1000;
 
-        if (stroller.pauseTimer > 0) {
-          stroller.pauseTimer -= dt;
+        // Move towards target continuously (no pause)
+        const dx = stroller.targetX - stroller.x;
+        const dy = stroller.targetY - stroller.y;
+        const dist = Math.hypot(dx, dy);
+
+        if (dist < 10) {
+          // Reached target -> immediately pick next distant target (continuous walking)
+          const newTarget = this.getRandomTarget(stroller.x, stroller.y);
+          stroller.targetX = newTarget.x;
+          stroller.targetY = newTarget.y;
+          const newDx = stroller.targetX - stroller.x;
+          if (Math.abs(newDx) > 5) {
+            stroller.dir = (newDx < 0) ? 'l' : 'r';
+          }
         } else {
-          // Move towards target
-          const dx = stroller.targetX - stroller.x;
-          const dy = stroller.targetY - stroller.y;
-          const dist = Math.hypot(dx, dy);
+          const step = stroller.speed * dt;
+          stroller.x += (dx / dist) * step;
+          stroller.y += (dy / dist) * step;
+          
+          // Keep inside valid trapezoid
+          const valid = this.getValidWalkPos(stroller.x, stroller.y);
+          stroller.x = valid.x;
+          stroller.y = valid.y;
 
-          if (dist < 8) {
-            // Reached target -> pause for 1 to 3 seconds before next stroll
-            stroller.pauseTimer = 1.0 + Math.random() * 2.0;
-            const newTarget = this.getRandomTarget();
-            stroller.targetX = newTarget.x;
-            stroller.targetY = newTarget.y;
-            const newDx = stroller.targetX - stroller.x;
-            if (Math.abs(newDx) > 5) {
-              stroller.dir = (newDx < 0) ? 'l' : 'r';
-            }
-          } else {
-            const step = stroller.speed * dt;
-            stroller.x += (dx / dist) * step;
-            stroller.y += (dy / dist) * step;
-            
-            // Keep inside valid trapezoid
-            const valid = this.getValidWalkPos(stroller.x, stroller.y);
-            stroller.x = valid.x;
-            stroller.y = valid.y;
-
-            if (Math.abs(dx) > 2) {
-              stroller.dir = (dx < 0) ? 'l' : 'r';
-            }
+          if (Math.abs(dx) > 2) {
+            stroller.dir = (dx < 0) ? 'l' : 'r';
           }
         }
       }
