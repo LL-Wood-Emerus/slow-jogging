@@ -315,6 +315,22 @@
 
     </div>
 
+    <!-- Cancel Confirmation Modal (Yes / No Prompt) -->
+    <div id="cancel-confirm-modal" class="hidden absolute inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4 text-center">
+      <div class="max-w-sm w-full bg-white/95 border-2 border-rose-300 rounded-3xl p-6 shadow-2xl space-y-4 animate-bounce-in text-slate-800">
+        <div class="text-4xl">⚠️</div>
+        <h3 class="text-xl font-black text-rose-600">確定要取消超慢跑嗎？</h3>
+        <p class="text-slate-600 text-xs font-bold leading-relaxed">當前的運動紀錄將不會保存，確定要回到首頁選擇畫面嗎？</p>
+        <div class="grid grid-cols-2 gap-3 pt-2">
+          <button id="btn-cancel-confirm-no" class="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-800 font-bold text-sm transition">
+            否 (繼續跑步)
+          </button>
+          <button id="btn-cancel-confirm-yes" class="py-2.5 px-4 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-bold text-sm shadow-md transition">
+            是 (確定取消)
+          </button>
+        </div>
+      </div>
+    </div>
 
     <!-- Screen 3: 跑步結束慶祝畫面 (Victory Screen Modal - Light Theme) -->
     <div id="screen-celebrate" class="screen hidden absolute inset-0 bg-slate-900/40 backdrop-blur-lg z-50 flex flex-col items-center justify-center p-4 text-center overflow-y-auto">
@@ -358,13 +374,13 @@
   </div>
 
   <!-- Application Modules -->
-  <script src="js/state.js?v=110"></script>
-  <script src="js/audio.js?v=110"></script>
-  <script src="js/characters.js?v=110"></script>
-  <script src="js/scenes.js?v=110"></script>
-  <script src="js/stage.js?v=110"></script>
-  <script src="js/speech.js?v=110"></script>
-  <script src="js/ui.js?v=110"></script>
-  <script src="app.js?v=110"></script>
+  <script src="js/state.js?v=120"></script>
+  <script src="js/audio.js?v=120"></script>
+  <script src="js/characters.js?v=120"></script>
+  <script src="js/scenes.js?v=120"></script>
+  <script src="js/stage.js?v=120"></script>
+  <script src="js/speech.js?v=120"></script>
+  <script src="js/ui.js?v=120"></script>
+  <script src="app.js?v=120"></script>
 </body>
 </html>
