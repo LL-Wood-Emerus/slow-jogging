@@ -287,7 +287,7 @@ class StageRenderer {
   renderRunningCharacter(ctx) {
     const charCfg = STAGE_LAYOUT_CONFIG.character;
     const charX = charCfg.x;   // Fixed 1400px over right treadmill
-    const charY = charCfg.y;  // Fixed 760px on treadmill belt
+    const charY = charCfg.y + 10;  // Lowered 10px to sit securely on treadmill belt
     const charWidth = charCfg.width;
     const charHeight = charCfg.height;
 
@@ -305,8 +305,8 @@ class StageRenderer {
     const bounceOffset = (charState === 'running' && !state.isPaused) ? -Math.sin(tau * Math.PI) * 12 : 0;
     const tiltAngle = 0;
 
-    // Shadow position aligned directly with character shoe soles on treadmill
-    const shadowY = charY - 20;
+    // Shadow position aligned directly with character shoe soles on treadmill belt
+    const shadowY = charY + 2;
 
     // Draw Unified Dynamic Ground Shadow
     charMgr.drawUnifiedGroundShadow(ctx, charX, shadowY, charWidth, bounceOffset);
