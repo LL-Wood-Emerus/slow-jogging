@@ -179,9 +179,7 @@ class AudioEngine {
   }
 
   pauseAudio() {
-    if (this.bgmAudio) {
-      this.bgmAudio.pause();
-    }
+    // Keep BGM playing continuously during exercise pause, only stop metronome clicks
     if (this.metroTimer) {
       clearTimeout(this.metroTimer);
       this.metroTimer = null;
