@@ -5,7 +5,7 @@
 const CHARACTER_SCALES = {
   saya: {
     sitting: 1.00,
-    standing: 1.00,
+    standing: 1.05, // Enlarged by 5% for selected standing state
     running: 1.00,
     celebration: 1.00
   },
