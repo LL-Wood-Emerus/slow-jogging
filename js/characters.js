@@ -5,21 +5,24 @@
 const CHARACTER_SCALES = {
   saya: {
     sitting: 1.00,
-    standing: 1.10, // Enlarged by +10% (additional +5%)
+    standing: 1.10,
     running: 1.00,
-    celebration: 1.00
+    celebration: 1.00,
+    offsetY: { sitting: 0, standing: 0, running: 0, stroll: 0 }
   },
   sheath: {
     sitting: 1.00,
-    standing: 1.10, // Enlarged by 10% for selected standing state
+    standing: 1.10,
     running: 1.00,
-    celebration: 1.00
+    celebration: 1.00,
+    offsetY: { sitting: 0, standing: 0, running: 0, stroll: 0 }
   },
   hiiragi: {
     sitting: 1.00,
-    standing: 1.05, // Enlarged by 5% for selected standing state
+    standing: 1.05,
     running: 1.00,
-    celebration: 1.00
+    celebration: 1.00,
+    offsetY: { sitting: 0, standing: 0, running: 12, stroll: 12 } // Lower Hiiragi Y position by 12px for running & stroll
   }
 };
 
@@ -108,6 +111,22 @@ class CharacterManager {
 
     const scales = CHARACTER_SCALES[charId] || {};
     let customScale = 1.0;
+    let customOffsetY = 0;
+
+    if (scales.offsetY) {
+      if (typeof scales.offsetY === 'number') {
+        customOffsetY = scales.offsetY;
+      } else if (stateName === 'running') {
+        customOffsetY = scales.offsetY.running || 0;
+      } else if (stateName === 'sitting') {
+        customOffsetY = scales.offsetY.sitting || 0;
+      } else if (stateName === 'standing' || stateName === 'selection_loop') {
+        customOffsetY = scales.offsetY.standing || 0;
+      } else if (stateName === 'celebration') {
+        customOffsetY = scales.offsetY.celebration || 0;
+      }
+    }
+
     if (stateName === 'sitting') {
       customScale = scales.sitting || 1.0;
     } else if (stateName === 'selection_loop' || stateName === 'idle' || stateName === 'idle_blink') {
@@ -127,7 +146,7 @@ class CharacterManager {
     const drawH = height * scaleMult;
 
     ctx.save();
-    ctx.translate(x, y + bounceOffset);
+    ctx.translate(x, y + bounceOffset + customOffsetY);
     if (tiltAngle !== 0) ctx.rotate(tiltAngle);
 
     if (stateName === 'sitting') {
@@ -227,8 +246,16 @@ class CharacterManager {
     const frameW = 512;
     const frameH = 512;
 
+    const scales = CHARACTER_SCALES[charId] || {};
+    let strollOffsetY = 0;
+    if (scales.offsetY) {
+      strollOffsetY = (typeof scales.offsetY === 'number')
+        ? scales.offsetY
+        : (scales.offsetY.stroll !== undefined ? scales.offsetY.stroll : (scales.offsetY.running || 0));
+    }
+
     ctx.save();
-    ctx.translate(x, y);
+    ctx.translate(x, y + strollOffsetY);
 
     // Unified Ground Shadow
     this.drawUnifiedGroundShadow(ctx, 0, 2, width, 0);
