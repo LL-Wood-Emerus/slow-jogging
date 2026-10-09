@@ -37,7 +37,7 @@ class CharacterManager {
     states['sitting'] = { image: sittingImg, json: null, totalDur: 0 };
 
     // Load animated states (metadata + sprite sheet PNG)
-    const animStateNames = ['idle', 'idle_blink', 'walking', 'running', 'celebration'];
+    const animStateNames = ['idle', 'idle_blink', 'running', 'celebration'];
     for (const name of animStateNames) {
       try {
         let json = null;

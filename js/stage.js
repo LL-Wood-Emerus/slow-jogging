@@ -298,9 +298,7 @@ class StageRenderer {
 
     // Determine character animation state
     let charState = 'running';
-    if (state.isCountdown || state.screen === 'celebrate') {
-      charState = 'walking';
-    } else if (state.isPaused) {
+    if (state.isCountdown || state.isPaused) {
       charState = 'idle';
     }
 
