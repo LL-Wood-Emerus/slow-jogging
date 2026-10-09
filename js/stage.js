@@ -314,11 +314,20 @@ class StageRenderer {
     // Draw Unified Dynamic Ground Shadow
     charMgr.drawUnifiedGroundShadow(ctx, charX, shadowY, charWidth, bounceOffset);
 
-    // Draw Character Animated Sprite Frame
-    const bpmSpeedFactor = (state.bpm || 180) / 120;
+    // Draw Character Animated Sprite Frame (BPM synchronized)
+    // 1 full 18-frame sprite cycle = 2 beats (steps) -> Target cycle duration = 120,000 / BPM
+    const bpm = state.bpm || 180;
+    const targetCycleDurMs = 120000 / bpm;
+    const activeCharId = charMgr.charIds[state.charIndex];
+    const activeCharData = charMgr.characters[activeCharId];
+    const runningStateData = activeCharData ? activeCharData.states['running'] : null;
+    const charJsonDurMs = (runningStateData && runningStateData.totalDur) ? runningStateData.totalDur : 1000;
+
+    const speedMultiplier = charJsonDurMs / targetCycleDurMs;
     const animTimeMs = (charState === 'running')
-      ? this.runningTime * 1000 * bpmSpeedFactor
+      ? this.runningTime * 1000 * speedMultiplier
       : performance.now();
+
     charMgr.drawStateFrame(ctx, state.charIndex, charState, animTimeMs, charX, charY, charWidth, charHeight, bounceOffset, tiltAngle);
 
     // Save screen position for speech bubble placement
