@@ -1,6 +1,28 @@
 /**
- * Character Sprite & Animation Manager Module (High Performance Pre-calculated Engine)
+ * Per-character fine-tuning scale configuration table
+ * Allows independent scale adjustments for sitting, standing (selection/idle), running, and celebration.
  */
+const CHARACTER_SCALES = {
+  saya: {
+    sitting: 1.00,
+    standing: 1.00,
+    running: 1.00,
+    celebration: 1.00
+  },
+  sheath: {
+    sitting: 1.00,
+    standing: 1.00,
+    running: 1.00,
+    celebration: 1.00
+  },
+  hiiragi: {
+    sitting: 1.00,
+    standing: 1.05, // Enlarged by 5% for selected standing state
+    running: 1.00,
+    celebration: 1.00
+  }
+};
+
 class CharacterManager {
   constructor() {
     this.charIds = ['saya', 'sheath', 'hiiragi'];
@@ -84,9 +106,21 @@ class CharacterManager {
     const charData = this.characters[charId];
     if (!charData) return;
 
-    let scaleMult = 1.0;
+    const scales = CHARACTER_SCALES[charId] || {};
+    let customScale = 1.0;
+    if (stateName === 'sitting') {
+      customScale = scales.sitting || 1.0;
+    } else if (stateName === 'selection_loop' || stateName === 'idle' || stateName === 'idle_blink') {
+      customScale = scales.standing || 1.0;
+    } else if (stateName === 'running') {
+      customScale = scales.running || 1.0;
+    } else if (stateName === 'celebration') {
+      customScale = scales.celebration || 1.0;
+    }
+
+    let scaleMult = customScale;
     if (stateName === 'idle' || stateName === 'idle_blink') {
-      scaleMult = 1.08;
+      scaleMult *= 1.08;
     }
 
     const drawW = width * scaleMult;
