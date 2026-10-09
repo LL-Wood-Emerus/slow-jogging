@@ -11,7 +11,7 @@ const CHARACTER_SCALES = {
   },
   sheath: {
     sitting: 1.00,
-    standing: 1.00,
+    standing: 1.10, // Enlarged by 10% for selected standing state
     running: 1.00,
     celebration: 1.00
   },
