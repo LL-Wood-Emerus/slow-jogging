@@ -8,21 +8,27 @@ const CHARACTER_SCALES = {
     standing: 1.10,
     running: 1.00,
     celebration: 1.00,
-    offsetY: { sitting: 0, standing: 0, running: 0, stroll: 0 }
+    stroll: 1.00,
+    strollIdle: 1.08, // Scale up stroll_idle by +8% during pause so standing height matches strolling height
+    offsetY: { sitting: 0, standing: 0, running: 0, stroll: 0, strollIdle: 0 }
   },
   sheath: {
     sitting: 1.00,
     standing: 1.10,
     running: 1.00,
     celebration: 1.00,
-    offsetY: { sitting: 0, standing: 0, running: 0, stroll: 0 }
+    stroll: 1.00,
+    strollIdle: 1.08, // Scale up stroll_idle by +8% during pause so standing height matches strolling height
+    offsetY: { sitting: 0, standing: 0, running: 0, stroll: 0, strollIdle: 0 }
   },
   hiiragi: {
     sitting: 1.00,
     standing: 1.05,
     running: 1.00,
     celebration: 1.00,
-    offsetY: { sitting: 0, standing: 0, running: 12, stroll: 12 } // Lower Hiiragi Y position by 12px for running & stroll
+    stroll: 1.00,
+    strollIdle: 1.08, // Scale up stroll_idle by +8% during pause so standing height matches strolling height
+    offsetY: { sitting: 0, standing: 0, running: 12, stroll: 12, strollIdle: 12 }
   }
 };
 
@@ -247,21 +253,36 @@ class CharacterManager {
     const frameH = 512;
 
     const scales = CHARACTER_SCALES[charId] || {};
+    let customStrollScale = 1.0;
     let strollOffsetY = 0;
-    if (scales.offsetY) {
-      strollOffsetY = (typeof scales.offsetY === 'number')
-        ? scales.offsetY
-        : (scales.offsetY.stroll !== undefined ? scales.offsetY.stroll : (scales.offsetY.running || 0));
+
+    if (stateKey === 'stroll_idle') {
+      customStrollScale = (scales.strollIdle !== undefined) ? scales.strollIdle : (scales.stroll || 1.0);
+      if (scales.offsetY) {
+        strollOffsetY = (typeof scales.offsetY === 'number')
+          ? scales.offsetY
+          : (scales.offsetY.strollIdle !== undefined ? scales.offsetY.strollIdle : (scales.offsetY.stroll || scales.offsetY.running || 0));
+      }
+    } else {
+      customStrollScale = (scales.stroll !== undefined) ? scales.stroll : 1.0;
+      if (scales.offsetY) {
+        strollOffsetY = (typeof scales.offsetY === 'number')
+          ? scales.offsetY
+          : (scales.offsetY.stroll !== undefined ? scales.offsetY.stroll : (scales.offsetY.running || 0));
+      }
     }
+
+    const drawW = width * customStrollScale;
+    const drawH = height * customStrollScale;
 
     ctx.save();
     ctx.translate(x, y + strollOffsetY);
 
     // Unified Ground Shadow
-    this.drawUnifiedGroundShadow(ctx, 0, 2, width, 0);
+    this.drawUnifiedGroundShadow(ctx, 0, 2, drawW, 0);
 
     // Render 512x512 sprite frame
-    ctx.drawImage(img, frameIdx * frameW, 0, frameW, frameH, -width / 2, -height, width, height);
+    ctx.drawImage(img, frameIdx * frameW, 0, frameW, frameH, -drawW / 2, -drawH, drawW, drawH);
     ctx.restore();
   }
 
