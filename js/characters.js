@@ -8,8 +8,8 @@ const CHARACTER_SCALES = {
     standing: 1.10,
     running: 1.00,
     celebration: 1.00,
-    stroll: 1.22,     // Enlarge SA active stroll (was 1.12 -> 1.22)
-    strollIdle: 1.15, // Qualified (1.15)
+    stroll: 1.12,     // Adjusted down to 1.12 (shoes fit ground line)
+    strollIdle: 1.18, // Adjusted up to 1.18 (shoes touch bottom border)
     offsetY: { sitting: 0, standing: 0, running: 0, stroll: 0, strollIdle: 0 }
   },
   sheath: {
@@ -17,17 +17,17 @@ const CHARACTER_SCALES = {
     standing: 1.10,
     running: 1.00,
     celebration: 1.00,
-    stroll: 1.22,     // Enlarge SH active stroll (was 1.12 -> 1.22)
-    strollIdle: 1.18, // Enlarge SH stroll idle (was 1.14 -> 1.18)
+    stroll: 1.12,     // Adjusted down to 1.12 (shoes fit ground line)
+    strollIdle: 1.11, // Adjusted down to 1.11 (shoes fit ground line)
     offsetY: { sitting: 0, standing: 0, running: 0, stroll: 0, strollIdle: 0 }
   },
   hiiragi: {
     sitting: 1.00,
     standing: 1.05,
-    running: 1.25,     // Enlarge HI running significantly (was 1.12 -> 1.25)
+    running: 1.15,     // Adjusted down to 1.15 (matches HI paused/idle)
     celebration: 1.00,
-    stroll: 1.22,     // Enlarge HI active stroll (was 1.12 -> 1.22)
-    strollIdle: 1.18, // Enlarge HI stroll idle
+    stroll: 1.12,     // Adjusted down to 1.12
+    strollIdle: 1.14, // Adjusted down to 1.14
     offsetY: { sitting: 0, standing: 0, running: 12, stroll: 12, strollIdle: 12 }
   }
 };
