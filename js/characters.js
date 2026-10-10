@@ -6,7 +6,7 @@ const CHARACTER_SCALES = {
   saya: {
     sitting: 1.00,
     standing: 1.10,
-    running: 1.10,     // Enlarged active running to 1.10 (matches benchmark)
+    running: 1.18,     // Enlarged active running by 1 shoe size to 1.18
     celebration: 1.00,
     stroll: 1.15,     // Qualified ✅
     strollIdle: 1.15, // Qualified ✅
@@ -15,7 +15,7 @@ const CHARACTER_SCALES = {
   sheath: {
     sitting: 1.00,
     standing: 1.10,
-    running: 1.10,     // Enlarged active running to 1.10 (matches benchmark)
+    running: 1.18,     // Enlarged active running by 1 shoe size to 1.18
     celebration: 1.00,
     stroll: 1.15,     // Qualified ✅
     strollIdle: 1.15, // Qualified ✅
