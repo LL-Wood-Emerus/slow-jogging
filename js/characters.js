@@ -8,8 +8,8 @@ const CHARACTER_SCALES = {
     standing: 1.10,
     running: 1.00,
     celebration: 1.00,
-    stroll: 1.22,     // Enlarged Saya stroll group to 1.22
-    strollIdle: 1.22, // Unified with stroll (1.22) so no jump on pause
+    stroll: 1.15,     // Adjusted down from 1.22 to 1.15 (Qualified like Sheath!)
+    strollIdle: 1.15, // Unified with stroll (1.15)
     offsetY: { sitting: 0, standing: 0, running: 0, stroll: 0, strollIdle: 0 }
   },
   sheath: {
