@@ -6,19 +6,19 @@ const CHARACTER_SCALES = {
   saya: {
     sitting: 1.00,
     standing: 1.10,
-    running: 1.00,
+    running: 1.10,     // Enlarged active running to 1.10 (matches benchmark)
     celebration: 1.00,
-    stroll: 1.15,     // Adjusted down from 1.22 to 1.15 (Qualified like Sheath!)
-    strollIdle: 1.15, // Unified with stroll (1.15)
+    stroll: 1.15,     // Qualified ✅
+    strollIdle: 1.15, // Qualified ✅
     offsetY: { sitting: 0, standing: 0, running: 0, stroll: 0, strollIdle: 0 }
   },
   sheath: {
     sitting: 1.00,
     standing: 1.10,
-    running: 1.00,
+    running: 1.10,     // Enlarged active running to 1.10 (matches benchmark)
     celebration: 1.00,
-    stroll: 1.15,     // Unified Sheath stroll group to 1.15
-    strollIdle: 1.15, // Unified with stroll (1.15) so no jump on pause
+    stroll: 1.15,     // Qualified ✅
+    strollIdle: 1.15, // Qualified ✅
     offsetY: { sitting: 0, standing: 0, running: 0, stroll: 0, strollIdle: 0 }
   },
   hiiragi: {
