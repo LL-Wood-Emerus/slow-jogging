@@ -8,8 +8,8 @@ const CHARACTER_SCALES = {
     standing: 1.10,
     running: 1.00,
     celebration: 1.00,
-    stroll: 1.00,
-    strollIdle: 1.08, // Scale up stroll_idle by +8% during pause so standing height matches strolling height
+    stroll: 1.12,     // Enlarge SA active stroll to match treadmill size
+    strollIdle: 1.14, // Enlarge SA stroll idle slightly more
     offsetY: { sitting: 0, standing: 0, running: 0, stroll: 0, strollIdle: 0 }
   },
   sheath: {
@@ -17,17 +17,17 @@ const CHARACTER_SCALES = {
     standing: 1.10,
     running: 1.00,
     celebration: 1.00,
-    stroll: 1.00,
-    strollIdle: 1.08, // Scale up stroll_idle by +8% during pause so standing height matches strolling height
+    stroll: 1.12,     // Enlarge SH active stroll to match treadmill size
+    strollIdle: 1.14, // Enlarge SH stroll idle slightly more
     offsetY: { sitting: 0, standing: 0, running: 0, stroll: 0, strollIdle: 0 }
   },
   hiiragi: {
     sitting: 1.00,
     standing: 1.05,
-    running: 1.00,
+    running: 1.12,     // Enlarge HI active running to match HI paused/idle
     celebration: 1.00,
-    stroll: 1.00,
-    strollIdle: 1.08, // Scale up stroll_idle by +8% during pause so standing height matches strolling height
+    stroll: 1.12,     // Enlarge HI active stroll
+    strollIdle: 1.14, // Enlarge HI stroll idle
     offsetY: { sitting: 0, standing: 0, running: 12, stroll: 12, strollIdle: 12 }
   }
 };
