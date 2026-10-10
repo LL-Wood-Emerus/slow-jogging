@@ -5,20 +5,20 @@
 const CHARACTER_SCALES = {
   saya: {
     sitting: 1.00,
-    standing: 1.10,
-    running: 1.18,     // Enlarged active running by 1 shoe size to 1.18
+    standing: 1.18,    // Enlarged by 1 shoe size (was 1.10 -> 1.18) for treadmill pause/countdown
+    running: 1.18,     // Qualified (Blue box) ✅
     celebration: 1.00,
-    stroll: 1.15,     // Qualified ✅
-    strollIdle: 1.15, // Qualified ✅
+    stroll: 1.15,     // Qualified (Blue box) ✅
+    strollIdle: 1.15, // Qualified (Blue box) ✅
     offsetY: { sitting: 0, standing: 0, running: 0, stroll: 0, strollIdle: 0 }
   },
   sheath: {
     sitting: 1.00,
-    standing: 1.10,
-    running: 1.18,     // Enlarged active running by 1 shoe size to 1.18
+    standing: 1.18,    // Enlarged by 1 shoe size (was 1.10 -> 1.18) for treadmill pause/countdown
+    running: 1.26,     // Enlarged by 1 shoe size (was 1.18 -> 1.26) for active running
     celebration: 1.00,
-    stroll: 1.15,     // Qualified ✅
-    strollIdle: 1.15, // Qualified ✅
+    stroll: 1.15,     // Qualified (Blue box) ✅
+    strollIdle: 1.15, // Qualified (Blue box) ✅
     offsetY: { sitting: 0, standing: 0, running: 0, stroll: 0, strollIdle: 0 }
   },
   hiiragi: {
