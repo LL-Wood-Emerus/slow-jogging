@@ -58,7 +58,7 @@ class StrollingManager {
     return { x: clampedX, y: clampedY };
   }
 
-  getRandomTarget(currentX, currentY) {
+  getRandomTarget(currentX, currentY, otherPos) {
     const area = STAGE_LAYOUT_CONFIG.walkArea;
     let target;
     let attempts = 0;
@@ -68,7 +68,15 @@ class StrollingManager {
       target = this.getValidWalkPos(rx, ry);
       attempts++;
       if (currentX === undefined) break;
-    } while (attempts < 10 && Math.hypot(target.x - currentX, target.y - currentY) < 150);
+
+      const distSelf = Math.hypot(target.x - currentX, target.y - currentY);
+      const distOther = otherPos ? Math.hypot(target.x - otherPos.x, target.y - otherPos.y) : 999;
+
+      // Keep target far from current position (>140px) AND far from other character (>170px)
+      if (distSelf >= 140 && distOther >= 170) {
+        break;
+      }
+    } while (attempts < 30);
 
     return target;
   }
@@ -78,15 +86,16 @@ class StrollingManager {
     const allIndices = [0, 1, 2];
     const strollIndices = allIndices.filter(i => i !== runningCharIndex);
 
-    // Initial starting positions for the 2 strolling characters
+    // Initial starting positions (Left zone vs Right zone to guarantee wide separation at start)
     const startPositions = [
-      { x: 250, y: 820 },
-      { x: 530, y: 860 }
+      { x: 220 + Math.random() * 80, y: 810 + Math.random() * 30 },
+      { x: 500 + Math.random() * 80, y: 845 + Math.random() * 30 }
     ];
 
     strollIndices.forEach((charIdx, i) => {
       const startPos = this.getValidWalkPos(startPositions[i].x, startPositions[i].y);
-      const targetPos = this.getRandomTarget(startPos.x, startPos.y);
+      const otherPos = (i === 1) ? this.strollers[0] : null;
+      const targetPos = this.getRandomTarget(startPos.x, startPos.y, otherPos);
       const dx = targetPos.x - startPos.x;
 
       this.strollers.push({
@@ -96,7 +105,7 @@ class StrollingManager {
         targetX: targetPos.x,
         targetY: targetPos.y,
         dir: (dx < 0) ? 'l' : 'r',
-        speed: 45 + Math.random() * 20, // 45~65 px/sec casual stroll speed
+        speed: 38 + Math.random() * 25, // 38~63 px/sec casual stroll speed
         animTime: Math.random() * 1000
       });
     });
@@ -104,6 +113,37 @@ class StrollingManager {
 
   updateAndRender(ctx, dt, isPaused) {
     if (this.strollers.length === 0) return;
+
+    // Apply anti-overlap repulsion force if strollers get closer than 150px
+    if (this.strollers.length > 1) {
+      const s0 = this.strollers[0];
+      const s1 = this.strollers[1];
+      const dist = Math.hypot(s0.x - s1.x, s0.y - s1.y);
+      const minAllowedDist = 150; // Minimum clearance between characters
+
+      if (dist < minAllowedDist && dist > 0) {
+        const overlap = minAllowedDist - dist;
+        const pushX = ((s0.x - s1.x) / dist) * overlap * 0.5 * dt * 5;
+        const pushY = ((s0.y - s1.y) / dist) * overlap * 0.5 * dt * 5;
+
+        s0.x += pushX;
+        s0.y += pushY;
+        s1.x -= pushX;
+        s1.y -= pushY;
+
+        const v0 = this.getValidWalkPos(s0.x, s0.y);
+        s0.x = v0.x; s0.y = v0.y;
+        const v1 = this.getValidWalkPos(s1.x, s1.y);
+        s1.x = v1.x; s1.y = v1.y;
+
+        // If too close, force one to pick a new target away from the other
+        if (dist < 100) {
+          const newTarget = this.getRandomTarget(s0.x, s0.y, { x: s1.x, y: s1.y });
+          s0.targetX = newTarget.x;
+          s0.targetY = newTarget.y;
+        }
+      }
+    }
 
     // Y-sorting so characters farther back (smaller Y) draw behind closer ones (larger Y)
     this.strollers.sort((a, b) => a.y - b.y);
@@ -121,8 +161,10 @@ class StrollingManager {
         const dist = Math.hypot(dx, dy);
 
         if (dist < 10) {
-          // Reached target -> immediately pick next distant target (continuous walking)
-          const newTarget = this.getRandomTarget(stroller.x, stroller.y);
+          // Reached target -> pick new target far from other stroller
+          const otherStroller = this.strollers.find(s => s !== stroller);
+          const otherPos = otherStroller ? { x: otherStroller.x, y: otherStroller.y } : null;
+          const newTarget = this.getRandomTarget(stroller.x, stroller.y, otherPos);
           stroller.targetX = newTarget.x;
           stroller.targetY = newTarget.y;
           const newDx = stroller.targetX - stroller.x;
