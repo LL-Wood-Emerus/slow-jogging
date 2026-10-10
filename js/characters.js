@@ -8,8 +8,8 @@ const CHARACTER_SCALES = {
     standing: 1.10,
     running: 1.00,
     celebration: 1.00,
-    stroll: 1.12,     // Adjusted down to 1.12 (shoes fit ground line)
-    strollIdle: 1.18, // Adjusted up to 1.18 (shoes touch bottom border)
+    stroll: 1.22,     // Enlarged Saya stroll group to 1.22
+    strollIdle: 1.22, // Unified with stroll (1.22) so no jump on pause
     offsetY: { sitting: 0, standing: 0, running: 0, stroll: 0, strollIdle: 0 }
   },
   sheath: {
@@ -17,17 +17,17 @@ const CHARACTER_SCALES = {
     standing: 1.10,
     running: 1.00,
     celebration: 1.00,
-    stroll: 1.12,     // Adjusted down to 1.12 (shoes fit ground line)
-    strollIdle: 1.11, // Adjusted down to 1.11 (shoes fit ground line)
+    stroll: 1.15,     // Unified Sheath stroll group to 1.15
+    strollIdle: 1.15, // Unified with stroll (1.15) so no jump on pause
     offsetY: { sitting: 0, standing: 0, running: 0, stroll: 0, strollIdle: 0 }
   },
   hiiragi: {
     sitting: 1.00,
     standing: 1.05,
-    running: 1.15,     // Adjusted down to 1.15 (matches HI paused/idle)
+    running: 1.19,     // Enlarged HI running by half a shoe (was 1.15 -> 1.19)
     celebration: 1.00,
-    stroll: 1.12,     // Adjusted down to 1.12
-    strollIdle: 1.14, // Adjusted down to 1.14
+    stroll: 1.15,     // Unified Hiiragi stroll group to 1.15
+    strollIdle: 1.15, // Unified with stroll (1.15) so no jump on pause
     offsetY: { sitting: 0, standing: 0, running: 12, stroll: 12, strollIdle: 12 }
   }
 };
