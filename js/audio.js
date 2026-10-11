@@ -14,10 +14,14 @@ class AudioEngine {
     this.bgmAudio = new Audio();
     this.bgmAudio.loop = true;
     this.bgmTracks = {
-      sakura: 'assets/BGM/Cosmic Voyage Unfolds.mp3',
-      forest: 'assets/BGM/Ethereal Voices Of Tomorrow.mp3',
-      cyber:  'assets/BGM/Moonlight Echo Sonata.mp3',
-      maple:  'assets/BGM/Stardust Dance In Space.mp3'
+      topic1: 'assets/BGM/topic1.mp3',
+      topic2: 'assets/BGM/topic2.mp3',
+      topic3: 'assets/BGM/topic3.mp3',
+      topic4: 'assets/BGM/topic4.mp3',
+      topic5: 'assets/BGM/topic5.mp3',
+      topic6: 'assets/BGM/topic6.mp3',
+      topic7: 'assets/BGM/topic7.mp3',
+      topic8: 'assets/BGM/topic8.mp3'
     };
   }
 
@@ -154,7 +158,7 @@ class AudioEngine {
   }
 
   playBgm(sceneId) {
-    const trackSrc = this.bgmTracks[sceneId || state.sceneId] || this.bgmTracks.sakura;
+    const trackSrc = this.bgmTracks[sceneId || state.sceneId] || this.bgmTracks.topic1;
     const currentSrc = this.bgmAudio.src;
     
     if (!currentSrc || !currentSrc.endsWith(encodeURI(trackSrc))) {

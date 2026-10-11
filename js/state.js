@@ -5,7 +5,7 @@ const state = {
   screen: 'standby', // 'standby' | 'countdown' | 'running' | 'celebrate'
   charIndex: -1,     // -1: 未選擇 (0: Saya, 1: Sheath, 2: Hiiragi)
   isCountdown: false, // true during initial 3-second countdown
-  sceneId: 'sakura', // 'sakura' | 'forest' | 'cyber' | 'maple'
+  sceneId: 'topic1', // 'topic1' ~ 'topic8'
   targetTime: 60,   // seconds (default 1 min for testing)
   remainingTime: 60,
   bpm: 180,
