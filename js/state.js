@@ -18,7 +18,7 @@ const state = {
 };
 
 const characters = [
-  { id: 'saya', name: 'Saya', icon: '🍵', title: '靜謐茶香白髮少女', color: '#1e293b' },
-  { id: 'sheath', name: 'Sheath', icon: '⚡', title: '元氣滿滿雙馬尾妹', color: '#0284c7' },
+  { id: 'saya', name: 'Saya', icon: '⚡', title: '靜謐茶香白髮少女', color: '#1e293b' },
+  { id: 'sheath', name: 'Sheath', icon: '🍵', title: '元氣滿滿雙馬尾妹', color: '#0284c7' },
   { id: 'hiiragi', name: 'Hiiragi', icon: '🌸', title: '悠閒療癒包包頭妹', color: '#e11d48' },
 ];
