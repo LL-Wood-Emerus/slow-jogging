@@ -13,6 +13,8 @@ class AudioEngine {
     // HTML5 BGM MP3 Audio Player
     this.bgmAudio = new Audio();
     this.bgmAudio.loop = true;
+    this.homeTrack = 'assets/BGM/home.mp3';
+    this.currentTrackType = null; // 'home' | 'running' | null
     this.bgmTracks = {
       topic1: 'assets/BGM/topic1.mp3',
       topic2: 'assets/BGM/topic2.mp3',
@@ -150,14 +152,51 @@ class AudioEngine {
     }
   }
 
+  getHomeBgmVol() {
+    if (state.bgmVol <= 0.01) return 0;
+    // Keep home screen BGM gentle and soft (approx 20% volume)
+    return Math.min(0.22, state.bgmVol * 0.35);
+  }
+
   setBgmVol(vol) {
     state.bgmVol = vol;
     if (this.bgmAudio) {
-      this.bgmAudio.volume = Math.max(0, Math.min(1, vol));
+      if (this.currentTrackType === 'home') {
+        this.bgmAudio.volume = this.getHomeBgmVol();
+      } else {
+        this.bgmAudio.volume = Math.max(0, Math.min(1, vol));
+      }
+    }
+  }
+
+  playHomeBgm() {
+    this.currentTrackType = 'home';
+    const homeSrc = this.homeTrack;
+    const currentSrc = this.bgmAudio.src;
+
+    if (!currentSrc || !currentSrc.endsWith(encodeURI(homeSrc))) {
+      this.bgmAudio.src = homeSrc;
+    }
+    this.bgmAudio.volume = this.getHomeBgmVol();
+    const playPromise = this.bgmAudio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Autoplay policy fallback: resume playing on first user click/touch
+        const onFirstInteract = () => {
+          if (state.screen === 'standby' && this.currentTrackType === 'home') {
+            this.bgmAudio.play().catch(() => {});
+          }
+          document.removeEventListener('pointerdown', onFirstInteract);
+          document.removeEventListener('keydown', onFirstInteract);
+        };
+        document.addEventListener('pointerdown', onFirstInteract, { once: true });
+        document.addEventListener('keydown', onFirstInteract, { once: true });
+      });
     }
   }
 
   playBgm(sceneId) {
+    this.currentTrackType = 'running';
     const trackSrc = this.bgmTracks[sceneId || state.sceneId] || this.bgmTracks.topic1;
     const currentSrc = this.bgmAudio.src;
     
@@ -190,11 +229,15 @@ class AudioEngine {
     }
   }
 
-  stopAudio() {
+  stopBgm() {
     if (this.bgmAudio) {
       this.bgmAudio.pause();
       this.bgmAudio.currentTime = 0;
     }
+  }
+
+  stopAudio() {
+    this.stopBgm();
     if (this.metroTimer) {
       clearTimeout(this.metroTimer);
       this.metroTimer = null;

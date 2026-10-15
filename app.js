@@ -16,5 +16,8 @@ document.addEventListener('visibilitychange', () => {
     if (typeof audio !== 'undefined' && audio && audio.ctx && audio.ctx.state === 'suspended') {
       audio.ctx.resume().catch(() => {});
     }
+    if (typeof audio !== 'undefined' && audio && state.screen === 'standby' && audio.currentTrackType === 'home' && audio.bgmAudio.paused) {
+      audio.playHomeBgm();
+    }
   }
 });

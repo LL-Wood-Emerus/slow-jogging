@@ -162,12 +162,18 @@ function switchScreen(screenName) {
   if (screenName === 'standby') {
     renderPreviewCanvases();
     startSelectionAnimation();
+    if (typeof audio !== 'undefined' && audio) {
+      audio.playHomeBgm();
+    }
   } else if (screenName === 'celebrate') {
     startCelebrateAnimation();
   }
 }
 
 function startCountdown() {
+  if (typeof audio !== 'undefined' && audio) {
+    audio.stopBgm();
+  }
   sceneMgr.pickRandomRunFrames();
   if (typeof stageRenderer !== 'undefined' && stageRenderer) {
     stageRenderer.cachedBgCanvas = null;
