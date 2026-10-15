@@ -496,8 +496,28 @@ function initEvents() {
   const drawer = document.getElementById('audio-panel-drawer');
 
   if (btnToggleDrawer && drawer) {
-    btnToggleDrawer.addEventListener('click', () => {
+    btnToggleDrawer.addEventListener('click', (e) => {
+      e.stopPropagation();
       drawer.classList.toggle('hidden');
+    });
+
+    // Prevent clicks inside drawer from bubbling to document and closing it
+    drawer.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Dismiss drawer when clicking anywhere outside
+    document.addEventListener('click', () => {
+      if (!drawer.classList.contains('hidden')) {
+        drawer.classList.add('hidden');
+      }
+    });
+
+    // Dismiss drawer on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !drawer.classList.contains('hidden')) {
+        drawer.classList.add('hidden');
+      }
     });
   }
   if (btnCloseDrawer && drawer) {
