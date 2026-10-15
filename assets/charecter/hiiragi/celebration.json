@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "assetVersion": "release-v1",
-  "characterId": "saya",
+  "assetVersion": "rescue-v2",
+  "characterId": "hiiragi",
   "state": "celebration",
-  "status": "approved",
+  "status": "draft",
   "image": "celebration.png",
   "frameWidth": 512,
   "frameHeight": 512,
@@ -13,32 +13,86 @@
   "indexBase": 0,
   "order": "row-major",
   "durationsMs": [
-    150,
-    100,
-    100,
-    100,
-    100,
-    100,
-    150,
-    200,
-    250,
-    200,
-    150,
-    100,
-    100,
-    100,
-    100,
-    250
+    416.6666666666667,
+    416.6666666666667,
+    416.6666666666667,
+    416.6666666666667,
+    208.33333333333334,
+    125.0,
+    291.6666666666667,
+    208.33333333333334,
+    208.33333333333334,
+    416.6666666666667,
+    416.6666666666667,
+    416.6666666666667,
+    416.6666666666667,
+    291.6666666666667,
+    250.0,
+    83.33333333333333
   ],
-  "loop": false,
-  "nextState": "idle",
+  "loop": true,
+  "playback": "forward",
+  "nextState": null,
   "anchor": [
     256,
-    464
+    476
   ],
   "background": "white",
   "colorSpace": "sRGB",
-  "facing": "reference-angle-toward-viewer",
+  "source": "../../生成輔助資料/SP/剪輯確認/SP-5至10秒.mp4",
+  "sourceFps": 24,
+  "sourceFrameIndexBase": 1,
+  "sourceFrames": [
+    1,
+    11,
+    21,
+    31,
+    41,
+    46,
+    49,
+    56,
+    61,
+    66,
+    76,
+    86,
+    96,
+    106,
+    113,
+    119
+  ],
+  "sourceTimestampsSeconds": [
+    0.0,
+    0.4166666666666667,
+    0.8333333333333334,
+    1.25,
+    1.6666666666666667,
+    1.875,
+    2.0,
+    2.2916666666666665,
+    2.5,
+    2.7083333333333335,
+    3.125,
+    3.5416666666666665,
+    3.9583333333333335,
+    4.375,
+    4.666666666666667,
+    4.916666666666667
+  ],
+  "originalVideoStartSeconds": 5,
+  "normalization": {
+    "crop": [
+      300,
+      0,
+      980,
+      720
+    ],
+    "scale": 0.65,
+    "offset": [
+      35,
+      35
+    ],
+    "perFrameAutoScale": false
+  },
   "frames": [
     {
       "index": 0,
@@ -49,7 +103,7 @@
         512
       ],
       "file": "frames/celebration/frame-001.png",
-      "durationMs": 150
+      "durationMs": 416.6666666666667
     },
     {
       "index": 1,
@@ -60,7 +114,7 @@
         512
       ],
       "file": "frames/celebration/frame-002.png",
-      "durationMs": 100
+      "durationMs": 416.6666666666667
     },
     {
       "index": 2,
@@ -71,7 +125,7 @@
         512
       ],
       "file": "frames/celebration/frame-003.png",
-      "durationMs": 100
+      "durationMs": 416.6666666666667
     },
     {
       "index": 3,
@@ -82,7 +136,7 @@
         512
       ],
       "file": "frames/celebration/frame-004.png",
-      "durationMs": 100
+      "durationMs": 416.6666666666667
     },
     {
       "index": 4,
@@ -93,7 +147,7 @@
         512
       ],
       "file": "frames/celebration/frame-005.png",
-      "durationMs": 100
+      "durationMs": 208.33333333333334
     },
     {
       "index": 5,
@@ -104,7 +158,7 @@
         512
       ],
       "file": "frames/celebration/frame-006.png",
-      "durationMs": 100
+      "durationMs": 125.0
     },
     {
       "index": 6,
@@ -115,7 +169,7 @@
         512
       ],
       "file": "frames/celebration/frame-007.png",
-      "durationMs": 150
+      "durationMs": 291.6666666666667
     },
     {
       "index": 7,
@@ -126,7 +180,7 @@
         512
       ],
       "file": "frames/celebration/frame-008.png",
-      "durationMs": 200
+      "durationMs": 208.33333333333334
     },
     {
       "index": 8,
@@ -137,7 +191,7 @@
         512
       ],
       "file": "frames/celebration/frame-009.png",
-      "durationMs": 250
+      "durationMs": 208.33333333333334
     },
     {
       "index": 9,
@@ -148,7 +202,7 @@
         512
       ],
       "file": "frames/celebration/frame-010.png",
-      "durationMs": 200
+      "durationMs": 416.6666666666667
     },
     {
       "index": 10,
@@ -159,7 +213,7 @@
         512
       ],
       "file": "frames/celebration/frame-011.png",
-      "durationMs": 150
+      "durationMs": 416.6666666666667
     },
     {
       "index": 11,
@@ -170,7 +224,7 @@
         512
       ],
       "file": "frames/celebration/frame-012.png",
-      "durationMs": 100
+      "durationMs": 416.6666666666667
     },
     {
       "index": 12,
@@ -181,7 +235,7 @@
         512
       ],
       "file": "frames/celebration/frame-013.png",
-      "durationMs": 100
+      "durationMs": 416.6666666666667
     },
     {
       "index": 13,
@@ -192,7 +246,7 @@
         512
       ],
       "file": "frames/celebration/frame-014.png",
-      "durationMs": 100
+      "durationMs": 291.6666666666667
     },
     {
       "index": 14,
@@ -203,7 +257,7 @@
         512
       ],
       "file": "frames/celebration/frame-015.png",
-      "durationMs": 100
+      "durationMs": 250.0
     },
     {
       "index": 15,
@@ -214,37 +268,24 @@
         512
       ],
       "file": "frames/celebration/frame-016.png",
-      "durationMs": 250
+      "durationMs": 83.33333333333333
     }
   ],
-  "source": "生成輔助資料/慶祝/Gemini/keyframes16-white",
-  "normalization": {
-    "scale": 0.655,
-    "sourceAnchor": [
-      640,
-      660
+  "sizeCorrection": {
+    "scale": 1.2,
+    "pivot": [
+      256,
+      464
     ],
-    "perFrameAutoScale": false
-  },
-  "sourceFrames1Based": [
-    25,
-    37,
-    43,
-    49,
-    55,
-    61,
-    67,
-    79,
-    97,
-    121,
-    145,
-    157,
-    163,
-    169,
-    181,
-    193
-  ],
-  "sourceRoot": "../../",
-  "approvedOn": "2026-10-06",
-  "derivedFrom": "v001"
+    "translation": [
+      0,
+      12
+    ],
+    "sourceBackup": "生成輔助資料/release/v2-before-resize",
+    "resampling": "bicubic",
+    "canvasSize": [
+      512,
+      512
+    ]
+  }
 }

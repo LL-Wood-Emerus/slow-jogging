@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "assetVersion": "release-v1",
-  "characterId": "saya",
+  "characterId": "sheath",
   "state": "running",
   "status": "approved",
   "image": "running.png",
@@ -13,24 +13,24 @@
   "indexBase": 0,
   "order": "row-major",
   "durationsMs": [
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556
+    83.33333333333333,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    83.33333333333333,
+    41.666666666666664,
+    83.33333333333333,
+    41.666666666666664,
+    83.33333333333333,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    83.33333333333333,
+    41.666666666666664,
+    83.33333333333333,
+    41.666666666666664
   ],
   "loop": true,
   "nextState": null,
@@ -38,64 +38,66 @@
     256,
     464
   ],
+  "coordinateSystem": "top-left,x-right,y-down",
   "background": "white",
   "colorSpace": "sRGB",
   "facing": "right",
   "sourceRoot": "../../",
-  "source": "生成輔助資料/跑步/Gemini重製/慢跑重試/source.mp4",
+  "source": "生成輔助資料/running/v005/source.mp4",
+  "reference": "Sheath_run.png",
   "sourceFps": 24,
   "sourceFrameIndexBase": 1,
   "sourceFrames": [
-    63,
-    64,
-    65,
-    66,
-    67,
-    68,
-    70,
-    71,
-    72,
-    73,
-    74,
-    75,
-    76,
-    77,
-    78,
-    80,
-    82,
-    84
+    89,
+    91,
+    92,
+    93,
+    94,
+    95,
+    97,
+    98,
+    100,
+    101,
+    103,
+    104,
+    105,
+    106,
+    107,
+    109,
+    110,
+    112
   ],
   "sourceTimestampsSeconds": [
-    2.5833333333333335,
-    2.625,
-    2.6666666666666665,
-    2.7083333333333335,
-    2.75,
-    2.7916666666666665,
-    2.875,
-    2.9166666666666665,
-    2.9583333333333335,
-    3.0,
-    3.0416666666666665,
-    3.0833333333333335,
-    3.125,
-    3.1666666666666665,
-    3.2083333333333335,
-    3.2916666666666665,
-    3.375,
-    3.4583333333333335
+    3.6666666666666665,
+    3.75,
+    3.7916666666666665,
+    3.8333333333333335,
+    3.875,
+    3.9166666666666665,
+    4.0,
+    4.041666666666667,
+    4.125,
+    4.166666666666667,
+    4.25,
+    4.291666666666667,
+    4.333333333333333,
+    4.375,
+    4.416666666666667,
+    4.5,
+    4.541666666666667,
+    4.625
   ],
   "normalization": {
-    "scale": 0.7,
+    "scale": 0.75,
     "sourceCrop": [
-      380,
-      0,
-      820,
-      720
+      420,
+      50,
+      860,
+      690
     ],
     "offset": [
-      94,
-      -5
+      95,
+      25
     ],
     "perFrameAutoScale": false
   },
@@ -109,7 +111,11 @@
         512
       ],
       "file": "frames/running/frame-001.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 83.33333333333333,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 1,
@@ -120,7 +126,11 @@
         512
       ],
       "file": "frames/running/frame-002.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 2,
@@ -131,7 +141,11 @@
         512
       ],
       "file": "frames/running/frame-003.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 3,
@@ -142,7 +156,11 @@
         512
       ],
       "file": "frames/running/frame-004.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 4,
@@ -153,7 +171,11 @@
         512
       ],
       "file": "frames/running/frame-005.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 5,
@@ -164,7 +186,11 @@
         512
       ],
       "file": "frames/running/frame-006.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 83.33333333333333,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 6,
@@ -175,7 +201,11 @@
         512
       ],
       "file": "frames/running/frame-007.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 7,
@@ -186,7 +216,11 @@
         512
       ],
       "file": "frames/running/frame-008.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 83.33333333333333,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 8,
@@ -197,7 +231,11 @@
         512
       ],
       "file": "frames/running/frame-009.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 9,
@@ -208,7 +246,11 @@
         512
       ],
       "file": "frames/running/frame-010.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 83.33333333333333,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 10,
@@ -219,7 +261,11 @@
         512
       ],
       "file": "frames/running/frame-011.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 11,
@@ -230,7 +276,11 @@
         512
       ],
       "file": "frames/running/frame-012.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 12,
@@ -241,7 +291,11 @@
         512
       ],
       "file": "frames/running/frame-013.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 13,
@@ -252,7 +306,11 @@
         512
       ],
       "file": "frames/running/frame-014.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 14,
@@ -263,7 +321,11 @@
         512
       ],
       "file": "frames/running/frame-015.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 83.33333333333333,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 15,
@@ -274,7 +336,11 @@
         512
       ],
       "file": "frames/running/frame-016.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 16,
@@ -285,7 +351,11 @@
         512
       ],
       "file": "frames/running/frame-017.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 83.33333333333333,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 17,
@@ -296,37 +366,14 @@
         512
       ],
       "file": "frames/running/frame-018.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664,
+      "offset": [
+        0,
+        0
+      ]
     }
   ],
-  "retiming": {
-    "method": "equal half-cycles",
-    "halfCycleMs": 500,
-    "transitionFramesOneBased": [
-      1,
-      10
-    ],
-    "nearArmForwardFramesOneBased": [
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9
-    ],
-    "farArmForwardFramesOneBased": [
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18
-    ]
-  },
-  "approvedOn": "2026-10-06",
-  "derivedFrom": "v004"
+  "approvedDate": "2026-10-09",
+  "approvalNote": "使用者確認無明顯異常，收入正式版",
+  "previousAssetVersion": "running-v005"
 }

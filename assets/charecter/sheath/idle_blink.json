@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "assetVersion": "release-v1",
-  "characterId": "saya",
+  "characterId": "sheath",
   "state": "idle_blink",
   "status": "approved",
   "image": "idle_blink.png",
@@ -13,10 +13,10 @@
   "indexBase": 0,
   "order": "row-major",
   "durationsMs": [
-    250,
-    250,
-    250,
-    250
+    760,
+    120,
+    760,
+    760
   ],
   "loop": false,
   "nextState": "idle",
@@ -24,9 +24,34 @@
     256,
     464
   ],
+  "coordinateSystem": "top-left,x-right,y-down",
   "background": "white",
   "colorSpace": "sRGB",
   "facing": "reference-angle-toward-viewer",
+  "sourceRoot": "../../",
+  "source": "生成輔助資料/idle/source.mp4",
+  "sourceFps": 24,
+  "sourceFrameIndexBase": 1,
+  "sourceFrames": [
+    85,
+    113,
+    137,
+    161
+  ],
+  "sourceTimestampsSeconds": [
+    3.5,
+    4.666666666666667,
+    5.666666666666667,
+    6.666666666666667
+  ],
+  "normalization": {
+    "scale": 0.35,
+    "offset": [
+      128,
+      24
+    ],
+    "perFrameAutoScale": false
+  },
   "frames": [
     {
       "index": 0,
@@ -37,7 +62,11 @@
         512
       ],
       "file": "frames/idle_blink/frame-001.png",
-      "durationMs": 250
+      "durationMs": 760,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 1,
@@ -48,7 +77,11 @@
         512
       ],
       "file": "frames/idle_blink/frame-002.png",
-      "durationMs": 250
+      "durationMs": 120,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 2,
@@ -59,7 +92,11 @@
         512
       ],
       "file": "frames/idle_blink/frame-003.png",
-      "durationMs": 250
+      "durationMs": 760,
+      "offset": [
+        0,
+        0
+      ]
     },
     {
       "index": 3,
@@ -70,19 +107,14 @@
         512
       ],
       "file": "frames/idle_blink/frame-004.png",
-      "durationMs": 250
+      "durationMs": 760,
+      "offset": [
+        0,
+        0
+      ]
     }
   ],
-  "source": "生成輔助資料/待機/採用圖集/sprite-sheet-alpha.png",
-  "normalization": {
-    "scale": 0.9,
-    "sourceAnchor": [
-      194,
-      478
-    ],
-    "perFrameAutoScale": false
-  },
-  "sourceRoot": "../../",
-  "approvedOn": "2026-10-06",
-  "derivedFrom": "v001"
+  "approvedDate": "2026-10-09",
+  "approvalNote": "使用者確認無明顯異常，收入正式版",
+  "previousAssetVersion": "v001"
 }

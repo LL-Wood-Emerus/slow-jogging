@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "assetVersion": "release-v1",
-  "characterId": "saya",
+  "characterId": "hiiragi",
+  "assetVersion": "rescue-v2",
   "state": "running",
-  "status": "approved",
+  "status": "draft",
   "image": "running.png",
   "frameWidth": 512,
   "frameHeight": 512,
@@ -13,89 +13,88 @@
   "indexBase": 0,
   "order": "row-major",
   "durationsMs": [
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556,
-    55.55555555555556
+    41.666666666666664,
+    83.33333333333333,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    83.33333333333333,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664
   ],
   "loop": true,
   "nextState": null,
   "anchor": [
     256,
-    464
+    476
   ],
   "background": "white",
   "colorSpace": "sRGB",
   "facing": "right",
-  "sourceRoot": "../../",
-  "source": "生成輔助資料/跑步/Gemini重製/慢跑重試/source.mp4",
+  "source": "../../生成輔助資料/running/v001/source.mp4",
   "sourceFps": 24,
   "sourceFrameIndexBase": 1,
   "sourceFrames": [
-    63,
-    64,
-    65,
-    66,
-    67,
-    68,
-    70,
-    71,
-    72,
-    73,
-    74,
-    75,
-    76,
-    77,
-    78,
-    80,
-    82,
-    84
+    38,
+    39,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57
   ],
   "sourceTimestampsSeconds": [
-    2.5833333333333335,
-    2.625,
-    2.6666666666666665,
-    2.7083333333333335,
-    2.75,
-    2.7916666666666665,
-    2.875,
-    2.9166666666666665,
-    2.9583333333333335,
-    3.0,
-    3.0416666666666665,
-    3.0833333333333335,
-    3.125,
-    3.1666666666666665,
-    3.2083333333333335,
-    3.2916666666666665,
-    3.375,
-    3.4583333333333335
+    1.5416666666666667,
+    1.5833333333333333,
+    1.6666666666666667,
+    1.7083333333333333,
+    1.75,
+    1.7916666666666667,
+    1.8333333333333333,
+    1.875,
+    1.9166666666666667,
+    1.9583333333333333,
+    2.0,
+    2.0833333333333335,
+    2.125,
+    2.1666666666666665,
+    2.2083333333333335,
+    2.25,
+    2.2916666666666665,
+    2.3333333333333335
   ],
   "normalization": {
-    "scale": 0.7,
-    "sourceCrop": [
-      380,
+    "crop": [
+      300,
       0,
-      820,
+      980,
       720
     ],
+    "scale": 0.65,
     "offset": [
-      94,
-      -5
+      35,
+      35
     ],
     "perFrameAutoScale": false
   },
@@ -109,7 +108,7 @@
         512
       ],
       "file": "frames/running/frame-001.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664
     },
     {
       "index": 1,
@@ -120,7 +119,7 @@
         512
       ],
       "file": "frames/running/frame-002.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 83.33333333333333
     },
     {
       "index": 2,
@@ -131,7 +130,7 @@
         512
       ],
       "file": "frames/running/frame-003.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664
     },
     {
       "index": 3,
@@ -142,7 +141,7 @@
         512
       ],
       "file": "frames/running/frame-004.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664
     },
     {
       "index": 4,
@@ -153,7 +152,7 @@
         512
       ],
       "file": "frames/running/frame-005.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664
     },
     {
       "index": 5,
@@ -164,7 +163,7 @@
         512
       ],
       "file": "frames/running/frame-006.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664
     },
     {
       "index": 6,
@@ -175,7 +174,7 @@
         512
       ],
       "file": "frames/running/frame-007.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664
     },
     {
       "index": 7,
@@ -186,7 +185,7 @@
         512
       ],
       "file": "frames/running/frame-008.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664
     },
     {
       "index": 8,
@@ -197,7 +196,7 @@
         512
       ],
       "file": "frames/running/frame-009.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664
     },
     {
       "index": 9,
@@ -208,7 +207,7 @@
         512
       ],
       "file": "frames/running/frame-010.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664
     },
     {
       "index": 10,
@@ -219,7 +218,7 @@
         512
       ],
       "file": "frames/running/frame-011.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 83.33333333333333
     },
     {
       "index": 11,
@@ -230,7 +229,7 @@
         512
       ],
       "file": "frames/running/frame-012.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664
     },
     {
       "index": 12,
@@ -241,7 +240,7 @@
         512
       ],
       "file": "frames/running/frame-013.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664
     },
     {
       "index": 13,
@@ -252,7 +251,7 @@
         512
       ],
       "file": "frames/running/frame-014.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664
     },
     {
       "index": 14,
@@ -263,7 +262,7 @@
         512
       ],
       "file": "frames/running/frame-015.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664
     },
     {
       "index": 15,
@@ -274,7 +273,7 @@
         512
       ],
       "file": "frames/running/frame-016.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664
     },
     {
       "index": 16,
@@ -285,7 +284,7 @@
         512
       ],
       "file": "frames/running/frame-017.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664
     },
     {
       "index": 17,
@@ -296,37 +295,24 @@
         512
       ],
       "file": "frames/running/frame-018.png",
-      "durationMs": 55.55555555555556
+      "durationMs": 41.666666666666664
     }
   ],
-  "retiming": {
-    "method": "equal half-cycles",
-    "halfCycleMs": 500,
-    "transitionFramesOneBased": [
-      1,
-      10
+  "sizeCorrection": {
+    "scale": 1.2,
+    "pivot": [
+      256,
+      464
     ],
-    "nearArmForwardFramesOneBased": [
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9
+    "translation": [
+      0,
+      12
     ],
-    "farArmForwardFramesOneBased": [
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18
+    "sourceBackup": "生成輔助資料/release/v2-before-resize",
+    "resampling": "bicubic",
+    "canvasSize": [
+      512,
+      512
     ]
-  },
-  "approvedOn": "2026-10-06",
-  "derivedFrom": "v004"
+  }
 }
